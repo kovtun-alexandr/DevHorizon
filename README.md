@@ -51,12 +51,12 @@ The production build is generated in the `dist` directory.
 ```text
 devhorizon/
 ├── public/
-│   └── data/
-│       └── data.json
+│   ├── data/
+│   │   └── data.json
+│   └── images/
 ├── src/
 │   ├── assets/
 │   │   ├── fonts/
-│   │   ├── images/
 │   │   ├── js/
 │   │   └── styles/
 │   └──
