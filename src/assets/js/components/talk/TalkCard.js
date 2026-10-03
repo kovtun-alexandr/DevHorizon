@@ -147,7 +147,7 @@ function createTalkTime(talk, favorite) {
 
     blockEl.append(
         createTalkStartToEndTime(talk.startTime, talk.endTime),
-        createTalkBarcode('./src/assets/images/pattern-barcode.svg'),
+        createTalkBarcode('/images/pattern-barcode.svg'),
         favorite
             ? createFavoriteButton(talk.id)
             : createTalkDay(talk.day)
@@ -175,7 +175,9 @@ function createTalkBarcode(url) {
 
     imgEl.classList.add('barcode')
 
-    imgEl.src = url
+    const basePath = import.meta.env.BASE_URL
+
+    imgEl.src = `${basePath}${url}`
     imgEl.alt = 'Barcode'
 
     return imgEl

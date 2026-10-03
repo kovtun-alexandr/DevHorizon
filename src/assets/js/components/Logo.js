@@ -1,5 +1,3 @@
-import imgLogo from './../../images/logo.svg';
-
 export default function createLogo() {
     const blockEl = document.createElement('div')
 
@@ -7,7 +5,7 @@ export default function createLogo() {
 
     const path = window.location.pathname
 
-    const isHomePage = path === '/' || path.endsWith('/index.html') || path === '';
+    const isHomePage = path === '/' || path.endsWith('/index.html') || path === ''
 
     const imageLogoEl = logoImage()
 
@@ -16,17 +14,19 @@ export default function createLogo() {
             logoLink('./', imageLogoEl)
         )
     } else {
-        blockEl.append(imageLogoEl);
+        blockEl.append(imageLogoEl)
     }
 
     return blockEl
 }
 
 function logoImage() {
-    const imgEl = document.createElement('img');
+    const imgEl = document.createElement('img')
 
-    imgEl.src = imgLogo;
-    imgEl.alt = 'Tech Conference Logo';
+    const basePath = import.meta.env.BASE_URL
+
+    imgEl.src = `${basePath}images/logo.svg`
+    imgEl.alt = 'Logo'
 
     return imgEl
 }

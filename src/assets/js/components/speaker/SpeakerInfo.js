@@ -28,7 +28,13 @@ function createSpeakerAvatar(url, altText, bgColor) {
 
     blokEl.classList.add('avatar')
 
-    imgEl.src = url
+    const basePath = import.meta.env.BASE_URL
+
+    const cleanAvatarPath = url.replace(/^\//, '')
+
+    imgEl.src = `${basePath}${cleanAvatarPath}`;
+
+    // imgEl.src = url
     imgEl.alt = altText
 
     if (bgColor) {
