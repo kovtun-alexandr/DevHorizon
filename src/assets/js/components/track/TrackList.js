@@ -11,7 +11,7 @@ export default function createTrackList(tracks) {
         const trackCard = createTrackCard(
             track.name,
             'card-link',
-            `/schedule.html?track=${track.id}`,
+            `./schedule.html?track=${track.id}`,
             track.description,
             track.color
         )

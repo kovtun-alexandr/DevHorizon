@@ -72,6 +72,11 @@ function updateFiltersState(filters, action) {
         return
     }
 
+    if (action.type === 'update-favorites') {
+        filters.mySchedule = action.value
+        return
+    }
+
     if (action.type === 'my-schedule') {
         if (filters.mySchedule !== null) {
             filters.mySchedule = null

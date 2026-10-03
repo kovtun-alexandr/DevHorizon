@@ -11,7 +11,7 @@ export default function createTrackNavList(tracks) {
         const trackLink = createLink(
             track.name,
             'nav-link',
-            `/schedule.html?track=${track.id}`
+            `./schedule.html?track=${track.id}`
         )
         blockEl.append(trackLink)
     });

@@ -21,7 +21,7 @@ body.append(pageContentContainer);
 
 const dataFetch = async () => {
     try {
-        return await fetchData('/data/data.json')
+        return await fetchData('./data/data.json')
     } catch (error) {
         console.error('Error fetching data:', error);
 

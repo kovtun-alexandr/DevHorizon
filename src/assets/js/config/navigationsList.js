@@ -1,17 +1,17 @@
 export const navigationsList = [
     {
         title: 'Home',
-        href: '/',
+        href: './',
         page: 'home'
     },
     {
         title: 'Schedule',
-        href: '/schedule.html',
+        href: './schedule.html',
         page: 'schedule'
     },
     {
         title: 'Speakers',
-        href: '/speakers.html',
+        href: './speakers.html',
         page: 'speakers'
     },
 ]

@@ -33,7 +33,7 @@ export default function createFilter(data, onFilterChange, initialFilters) {
             return
         }
 
-        const currentFiltersState = onFilterChange(action)
+        currentFiltersState = onFilterChange(action)
 
         updateVisualButtonsState(blockEl, currentFiltersState)
     })
@@ -42,9 +42,11 @@ export default function createFilter(data, onFilterChange, initialFilters) {
         const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
 
         if (currentFiltersState.mySchedule !== null) {
-            currentFiltersState.mySchedule = favorites
-
-            onFilterChange({ type: 'my-schedule', value: favorites })
+            if (favorites.length === 0) {
+                currentFiltersState = onFilterChange({ type: 'clear-all' })
+            } else {
+                currentFiltersState = onFilterChange({ type: 'update-favorites', value: favorites })
+            }
         }
 
         updateVisualButtonsState(blockEl, currentFiltersState)
