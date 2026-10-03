@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#00151D"/>
+  <text
+    x="256"
+    y="350"
+    text-anchor="middle"
+    font-family="'JetBrains Mono', monospace"
+    font-size="245"
+    font-weight="800"
+    letter-spacing="-18"
+    fill="#D1FF66">DEV</text>
+</svg>

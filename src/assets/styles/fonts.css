@@ -1,0 +1,56 @@
+/* ==================== FONT 1: JetBrains Mono ==================== */
+/* REGULAR (400) */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./../fonts/jetbrains-mono/jetbrains-mono-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* MEDIUM (500) */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./../fonts/jetbrains-mono/jetbrains-mono-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* BOLD (700) */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./../fonts/jetbrains-mono/jetbrains-mono-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* EXTRA BOLD (800) */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./../fonts/jetbrains-mono/jetbrains-mono-extrabold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==================== FONT 2: Chakra Petch ==================== */
+
+/* SEMI BOLD (600) */
+@font-face {
+    font-family: 'Chakra Petch';
+    src: url('./../fonts/chakra-petch/chakra-petch-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* BOLD (700) */
+@font-face {
+    font-family: 'Chakra Petch';
+    src: url('./../fonts/chakra-petch/chakra-petch-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

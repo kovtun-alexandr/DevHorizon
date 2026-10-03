@@ -1,0 +1,169 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1.25rem;
+    gap: 1rem;
+    position: relative;
+    background-color: var(--neutral-900);
+
+    @media (max-width: 45.5em) {
+        padding-block: .75rem;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 2rem);
+        height: 1px;
+        background-color: var(--neutral-600);
+    }
+
+    .navigation {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .625rem 1.5rem;
+        border: 1px solid var(--neutral-100);
+        font-weight: var(--text-preset-6-weight);
+        font-size: var(--text-preset-6-size);
+        line-height: var(--text-preset-6-line-height);
+        text-transform: uppercase;
+        transition: .2s;
+
+        &.isActive {
+            color: var(--green-200);
+            border: 1px solid var(--green-200);
+            box-shadow: 2px 2px 0px var(--green-200);
+        }
+
+        &:focus-visible {
+            color: var(--green-200);
+            border: 1px dashed var(--green-200);
+            box-shadow: 2px 2px 0px var(--green-200);
+            outline: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                color: var(--neutral-100);
+                border: 1px solid var(--neutral-100);
+                box-shadow: 2px 2px 0px var(--neutral-100);
+            }
+        }
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    @media (max-width: 45.5em) {
+        .navigation {
+            padding: 0 1rem;
+            position: fixed;
+            top: 4rem;
+            left: 100%;
+            opacity: 0;
+            transition: all .2s;
+        }
+
+        .menu-button {
+            position: relative;
+            display: flex;
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: .2s;
+            border: 1px solid var(--neutral-100);
+
+            &:focus-visible {
+                color: var(--green-200);
+                border: 1px dashed var(--green-200);
+                box-shadow: 2px 2px 0px var(--green-200);
+                outline: none;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    color: var(--neutral-100);
+                    border: 1px solid var(--neutral-100);
+                    box-shadow: 2px 2px 0px var(--neutral-100);
+                }
+            }
+        }
+
+        .menu-button::before,
+        .menu-button::after,
+        .menu-button span {
+            position: absolute;
+            content: '';
+            width: .8375rem;
+            height: 0.125rem;
+            left: 35%;
+            background: var(--neutral-100);
+            transition: .2s;
+        }
+
+        .menu-button::before {
+            top: 35%;
+        }
+
+        .menu-button::after {
+            bottom: 35%;
+        }
+
+        .menu-button span {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    }
+
+}
+
+body.menu-open {
+    overflow: hidden;
+
+    .header {
+        background-color: var(--neutral-800);
+
+        .navigation {
+            flex-direction: column;
+            position: fixed;
+            padding-block-start: 1.5rem;
+            padding-block-end: 2.5rem;
+            background-color: var(--neutral-800);
+            top: 4rem;
+            left: 0;
+            width: 100%;
+            opacity: 1;
+            z-index: 1;
+
+            .nav-link {
+                text-align: center;
+            }
+        }
+
+        .menu-button span {
+            opacity: 0;
+            transform: translateY(-50%) scale(0);
+        }
+
+        .menu-button::before {
+            top: 50%;
+            transform-origin: center;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .menu-button::after {
+            bottom: 50%;
+            transform-origin: center;
+            transform: translateY(50%) rotate(-45deg);
+        }
+    }
+}
