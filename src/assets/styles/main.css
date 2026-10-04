@@ -39,10 +39,6 @@ body {
     color: var(--red-300);
 }
 
-.logo {
-    max-width: 192px;
-}
-
 [class$="-title"] {
     display: flex;
     gap: .3rem;

@@ -4,8 +4,12 @@ export default function createLogo() {
     blockEl.classList.add('logo')
 
     const path = window.location.pathname
+    const basePath = import.meta.env.BASE_URL
 
-    const isHomePage = path === '/' || path.endsWith('/index.html') || path === ''
+    const isHomePage =
+        path === basePath ||
+        path === `${basePath}index.html` ||
+        path === ''
 
     const imageLogoEl = logoImage()
 

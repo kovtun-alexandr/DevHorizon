@@ -4,9 +4,9 @@ DevHorizon 2026 is a static conference website built with Vite, JavaScript, and 
 
 ## Project Pages
 
-- [Home](https://kovtun-alexandr.github.io/DevHorizon/)
-- [Schedule](https://kovtun-alexandr.github.io/DevHorizon/schedule.html)
-- [Speakers](https://kovtun-alexandr.github.io/DevHorizon/speakers.html)
+- Home
+- Schedule
+- Speakers
 
 ## Features
 
