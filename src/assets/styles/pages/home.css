@@ -28,6 +28,8 @@
     }
 }
 
+/* === CONFERENCE === */
+
 .conference {
     display: flex;
     flex-direction: column;
@@ -46,27 +48,30 @@
         background-size: 80%;
     }
 
-    .title {
-        font-family: var(--font-primary);
-        font-size: var(--text-size-80);
-        font-weight: var(--font-bold);
-        line-height: var(--line-height-100);
-        letter-spacing: var(--letter-spacing-2);
-        text-transform: lowercase;
+}
 
-        @media (max-width: 35em) {
-            font-size: var(--text-size-38);
-        }
-    }
+.title {
+    font-family: var(--font-primary);
+    font-size: var(--text-size-80);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-100);
+    letter-spacing: var(--letter-spacing-2);
+    text-transform: lowercase;
 
-    .details {
-        display: flex;
-        justify-content: space-between;
-        padding-block-start: 1rem;
-        border-top: 2px solid var(--neutral-900);
-        text-transform: uppercase;
+    @media (max-width: 35em) {
+        font-size: var(--text-size-38);
     }
 }
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    padding-block-start: 1rem;
+    border-top: 2px solid var(--neutral-900);
+    text-transform: uppercase;
+}
+
+/* === KEYNOTE === */
 
 .keynote {
     display: flex;
@@ -88,36 +93,9 @@
     }
 
     .keynote-title {
-        color: initial;
+        color: inherit;
         font-weight: var(--font-regular);
         font-size: var(--text-size-14);
-    }
-
-    .speaker-name {
-        font-family: var(--font-primary);
-        font-size: var(--text-size-32);
-        line-height: var(--line-height-120);
-        text-transform: lowercase;
-    }
-
-    .role {
-        font-weight: var(--font-medium);
-        color: var(--neutral-600);
-        max-width: 19.5rem;
-    }
-
-    .topic-talk {
-        font-size: var(--text-size-16);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        max-width: 19.5rem;
-        flex: 1 0 auto;
-    }
-
-    .meeting-time {
-        font-weight: var(--font-medium);
-        color: var(--neutral-600);
     }
 
     .avatar {
@@ -137,6 +115,42 @@
         }
     }
 
+    .body-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        .name {
+            font-family: var(--font-primary);
+            font-size: var(--text-size-32);
+            line-height: var(--line-height-120);
+            font-weight: var(--font-semibold);
+            text-transform: lowercase;
+            color: var(--neutral-900);
+        }
+
+        .role {
+            font-weight: var(--font-medium);
+            text-transform: uppercase;
+            color: var(--neutral-600);
+            max-width: 19.5rem;
+        }
+    }
+
+    .topic {
+        font-size: var(--text-size-16);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-width: 19.5rem;
+        flex: 1 0 auto;
+    }
+
+    .meeting {
+        font-weight: var(--font-medium);
+        color: var(--neutral-600);
+    }
+
     .view-more {
         display: flex;
         align-items: start;
@@ -150,6 +164,7 @@
         margin-block-start: 2.28175rem;
         font-weight: var(--font-bold);
         transition: .2s;
+        text-transform: uppercase;
 
         &::after {
             content: '';
@@ -182,6 +197,7 @@
     }
 }
 
+
 /* === TRAKS === */
 
 .tracks {
@@ -189,56 +205,57 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    .track-cards {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+}
 
-        @media (max-width: 62em) {
-            grid-template-columns: repeat(2, 1fr);
-        }
+.track-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 
-        @media (max-width: 35em) {
-            grid-template-columns: 1fr;
+    @media (max-width: 62em) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-        }
+    @media (max-width: 35em) {
+        grid-template-columns: 1fr;
 
-        .card-link {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 1rem 1.25rem;
-            gap: .375rem;
+    }
+}
 
-            border: 1px solid var(--neutral-100);
-            box-shadow: 2px 2px 0px var(--neutral-100);
+.card-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    gap: .375rem;
 
-            span {
-                font-family: var(--font-primary);
-                font-weight: var(--font-semibold);
-                font-size: var(--text-size-24);
-                line-height: var(--line-height-130);
-                text-transform: lowercase;
-            }
+    border: 1px solid var(--neutral-100);
+    box-shadow: 2px 2px 0px var(--neutral-100);
 
-            p {
-                color: var(--neutral-200);
-                text-transform: uppercase;
-            }
+    span {
+        font-family: var(--font-primary);
+        font-weight: var(--font-semibold);
+        font-size: var(--text-size-24);
+        line-height: var(--line-height-130);
+        text-transform: lowercase;
+    }
 
-            &:focus,
-            &:focus-visible {
-                border: 1px dashed var(--green-200);
-                box-shadow: 2px 2px 0px var(--green-200);
-                outline: none;
-            }
+    p {
+        color: var(--neutral-200);
+        text-transform: uppercase;
+    }
 
-            @media (hover: hover) and (pointer: fine) {
-                &:hover {
-                    border: 1px solid var(--green-200);
-                    box-shadow: 2px 2px 0px var(--green-200);
-                }
-            }
+    &:focus,
+    &:focus-visible {
+        border: 1px dashed var(--green-200);
+        box-shadow: 2px 2px 0px var(--green-200);
+        outline: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            border: 1px solid var(--green-200);
+            box-shadow: 2px 2px 0px var(--green-200);
         }
     }
 }
@@ -249,7 +266,8 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    .view-all-link {
-        margin-block-start: 1.5rem;
-    }
+}
+
+.view-all-link {
+    margin-block-start: 1.5rem;
 }

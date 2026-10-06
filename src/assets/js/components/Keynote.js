@@ -33,7 +33,7 @@ function createKeynoteTalkInfo(talk, date, data) {
     const fullSpeakerDatail = getFullSpeakerDetails(talk.speaker.id, data)
 
     fragment.append(
-        createTitle('h4', 'topic-talk', talk.title),
+        createTitle('h4', 'topic', talk.title),
         createKeynoteTalkMeetingTime(talk, date),
         buttonEl
     )
@@ -48,7 +48,7 @@ function createKeynoteTalkInfo(talk, date, data) {
 function createKeynoteTalkMeetingTime(talk, data) {
     const textEl = document.createElement('p')
 
-    textEl.classList.add('meeting-time')
+    textEl.classList.add('meeting')
 
     const { shortMonth, day } = formatDate(data)
 
