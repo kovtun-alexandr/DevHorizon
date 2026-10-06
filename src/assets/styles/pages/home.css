@@ -76,7 +76,7 @@
 .keynote {
     display: flex;
     flex-direction: column;
-    min-width: 530px;
+    min-width: 33.125rem;
     width: 100%;
     gap: 0.5rem;
     position: relative;
@@ -105,18 +105,17 @@
 
     .avatar {
         position: absolute;
-        height: 355px;
+        height: 22.1875rem;
         right: -25%;
         bottom: 0;
         aspect-ratio: 1.27;
 
         @media (max-width: 62em) {
-            right: -45px;
-            height: 330px;
+            right: -2.8125rem;
+            height: 20.625rem;
         }
 
         @media (max-width: 35em) {
-            opacity: 0;
             display: none;
         }
     }
@@ -179,8 +178,8 @@
 
         &::after {
             content: '';
-            width: 20px;
-            height: 20px;
+            width: 1.25rem;
+            height: 1.25rem;
             background-color: var(--neutral-900);
             -webkit-mask: url('/images/icon-arrow-right.svg') center / contain no-repeat;
             mask: url('/images/icon-arrow-right.svg') center / contain no-repeat;
