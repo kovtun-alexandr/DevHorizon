@@ -15,11 +15,6 @@ export default function createNavigation(className, page) {
             item.href
         )
 
-        // linkEl.classList.add('navigation-link')
-
-        // linkEl.href = item.href
-        // linkEl.textContent = item.title
-
         linkEl.dataset.page = item.page
 
         if (item.page === currentPage) {
