@@ -34,7 +34,7 @@ function createTalkLabel(track) {
 function createTalkBody(talk, showMore) {
     const blockEl = document.createElement('div')
 
-    blockEl.classList.add('body')
+    blockEl.classList.add('talk-body')
     blockEl.style.backgroundColor = talk.track.color
 
     const elements = [
@@ -66,8 +66,6 @@ function createTalkSpeaker(speaker) {
 
 function createSpeakerName(name) {
     const spanEl = document.createElement('span')
-
-    spanEl.classList.add('name')
 
     spanEl.textContent = `${name} // `
 
@@ -106,14 +104,24 @@ function createTalkDetailsWrap(talk) {
 }
 
 
+
+
 function createTalkDetails(talk) {
     const blockEl = document.createElement('div')
 
-    blockEl.classList.add('details')
+    blockEl.classList.add('talk-details')
 
-    blockEl.append(
+    const innerBlockEl = document.createElement('div')
+
+    innerBlockEl.classList.add('details-inner')
+
+    innerBlockEl.append(
         createTalkDescription(talk.description),
         createTalkLocation(talk.location)
+    )
+
+    blockEl.append(
+        innerBlockEl
     )
 
     return blockEl
@@ -121,8 +129,6 @@ function createTalkDetails(talk) {
 
 function createTalkDescription(text) {
     const textEl = document.createElement('p')
-
-    textEl.classList.add('description')
 
     textEl.textContent = text
 
@@ -132,8 +138,6 @@ function createTalkDescription(text) {
 function createTalkLocation(text) {
     const textEl = document.createElement('p')
 
-    textEl.classList.add('location')
-
     textEl.textContent = `Location: ${text}`
 
     return textEl
@@ -142,7 +146,7 @@ function createTalkLocation(text) {
 function createTalkTime(talk, favorite) {
     const blockEl = document.createElement('div')
 
-    blockEl.classList.add('time')
+    blockEl.classList.add('talk-time')
     blockEl.style.backgroundColor = talk.track.color
 
     blockEl.append(
