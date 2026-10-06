@@ -90,6 +90,11 @@
 
     @media (max-width: 75em) {
         min-width: auto;
+        min-height: 25rem;
+    }
+
+    @media (max-width: 35em) {
+        min-height: 21.25rem;
     }
 
     .keynote-title {
@@ -112,6 +117,7 @@
 
         @media (max-width: 35em) {
             opacity: 0;
+            display: none;
         }
     }
 
@@ -163,8 +169,13 @@
         box-shadow: 2px 2px 0px var(--neutral-900);
         margin-block-start: 2.28175rem;
         font-weight: var(--font-bold);
-        transition: .2s;
         text-transform: uppercase;
+        transition: .2s;
+
+        @media (max-width: 35em) {
+            width: 100%;
+            margin-block-start: 1rem;
+        }
 
         &::after {
             content: '';
