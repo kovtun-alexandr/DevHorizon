@@ -10,7 +10,7 @@ import initSpeakers from './pages/speakers.js';
 const body = document.querySelector('body')
 const page = body.dataset.page
 
-body.append(renderHeader(createLogo(), createNavigation(page)))
+body.append(renderHeader(createLogo(), createNavigation('header-nav', page)))
 
 const pageContentContainer = document.createElement('div')
 
@@ -51,7 +51,7 @@ const initApp = async () => {
             console.warn(`Unknown page type: ${page}`);
     }
 
-    body.append(renderFooter(createLogo(), createNavigation(page), data));
+    body.append(renderFooter(createLogo(), createNavigation('footer-nav', page), data));
 }
 
 initApp()

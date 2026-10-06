@@ -12,10 +12,6 @@
         padding-block: .75rem;
     }
 
-    .logo {
-        max-width: 192px;
-    }
-
     &::after {
         content: '';
         position: absolute;
@@ -24,13 +20,27 @@
         height: 1px;
         background-color: var(--neutral-600);
     }
+}
 
-    .navigation {
-        display: flex;
-        gap: 1rem;
+.logo {
+    max-width: 192px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+    transition: all .2s;
+
+    @media (max-width: 45.5em) {
+        padding: 0 1rem;
+        position: fixed;
+        top: 4rem;
+        left: 100%;
+        opacity: 0;
+        visibility: hidden;
     }
 
-    .nav-link {
+    a {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -63,71 +73,58 @@
             }
         }
     }
+}
 
-    .menu-button {
-        display: none;
-        outline: none;
-    }
+
+.menu-button {
+    display: none;
+    outline: none;
+    transition: .2s;
 
     @media (max-width: 45.5em) {
-        .navigation {
-            padding: 0 1rem;
-            position: fixed;
-            top: 4rem;
-            left: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: all .2s;
-        }
+        position: relative;
+        display: flex;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid var(--neutral-100);
 
-        .menu-button {
-            position: relative;
-            display: flex;
-            width: 2.5rem;
-            height: 2.5rem;
-            transition: .2s;
-            border: 1px solid var(--neutral-100);
-
-            &:focus-visible {
-                border: 1px dashed var(--green-200);
-                box-shadow: 2px 2px 0px var(--green-200);
-            }
-
-            @media (hover: hover) and (pointer: fine) {
-                &:hover {
-                    border: 1px solid var(--neutral-100);
-                    box-shadow: 2px 2px 0px var(--neutral-100);
-                }
-            }
-        }
-
-        .menu-button::before,
-        .menu-button::after,
-        .menu-button span {
+        span,
+        &::before,
+        &::after {
             position: absolute;
             content: '';
-            width: .8375rem;
+            width: 50%;
             height: 0.125rem;
-            left: 35%;
+            left: 25%;
             background: var(--neutral-100);
             transition: .2s;
         }
 
-        .menu-button::before {
-            top: 35%;
-        }
-
-        .menu-button::after {
-            bottom: 35%;
-        }
-
-        .menu-button span {
+        span {
             top: 50%;
             transform: translateY(-50%);
         }
 
-    }
+        &::before {
+            top: 32%;
+        }
 
+        &::after {
+            bottom: 32%;
+        }
+
+        &:focus-visible {
+            border: 1px dashed var(--green-200);
+            box-shadow: 2px 2px 0px var(--green-200);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                border: 1px solid var(--neutral-100);
+                box-shadow: 2px 2px 0px var(--neutral-100);
+            }
+        }
+    }
 }
 
 body.menu-open {
@@ -149,42 +146,46 @@ body.menu-open {
     .header {
         background-color: var(--neutral-800);
 
-        .navigation {
-            flex-direction: column;
-            position: fixed;
-            padding-block-start: 1.5rem;
-            padding-block-end: 2.5rem;
-            background-color: var(--neutral-800);
-            top: 4rem;
-            left: 0;
-            width: 100%;
-            opacity: 1;
-            visibility: visible;
-            z-index: 1;
+    }
 
-            .nav-link {
-                text-align: center;
-            }
+    .header-nav {
+        flex-direction: column;
+        position: fixed;
+        padding-block-start: 1.5rem;
+        padding-block-end: 2.5rem;
+        background-color: var(--neutral-800);
+        top: 4rem;
+        left: 0;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        z-index: 1;
+
+        a {
+            text-align: center;
         }
+    }
 
-        .menu-button span {
+    .menu-button {
+        span {
             opacity: 0;
             transform: translateY(-50%) scale(0);
         }
 
-        .menu-button::before {
+        &::before {
             top: 50%;
             transform-origin: center;
             transform: translateY(-50%) rotate(45deg);
         }
 
-        .menu-button::after {
+        &::after {
             bottom: 50%;
             transform-origin: center;
             transform: translateY(50%) rotate(-45deg);
         }
     }
 }
+
 
 @keyframes fadeOverlay {
     from {

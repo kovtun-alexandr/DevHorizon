@@ -1,11 +1,14 @@
 export default function createLink(
     text,
-    className,
+    className = null,
     link
 ) {
     const linkEl = document.createElement('a')
 
-    linkEl.classList.add(className)
+    if (className) {
+        linkEl.classList.add(className)
+    }
+
     linkEl.href = link
     linkEl.textContent = text
 
