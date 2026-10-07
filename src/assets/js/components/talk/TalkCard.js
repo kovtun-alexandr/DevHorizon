@@ -2,197 +2,197 @@ import createButton from "../buttons/Button.js"
 import createFavoriteButton from "../buttons/FavoriteButton.js"
 import createTitle from "../Title.js"
 
-export default function createTalkCard(talk, showMore = null, favorite = null) {
-    const blockEl = document.createElement('article')
+export default class TalkCard {
+    constructor(
+        talk,
+        showMore = null,
+        favorite = null,
+    ) {
+        this.talk = talk;
+        this.showMore = showMore;
+        this.favorite = favorite;
 
-    blockEl.classList.add('talk')
-    blockEl.style.border = `1px solid ${talk.track.color}`
+        this.favoriteButton = this.favorite
+            ? createFavoriteButton(this.talk.id)
+            : null;
+        this.importPath = import.meta.env.BASE_URL;
+        this.imgUrl = '/images/pattern-barcode.svg';
 
-    blockEl.append(
-        createTalkLabel(talk.track),
-        createTalkBody(talk, showMore),
-        createTalkTime(talk, favorite)
-    )
-
-    return blockEl
-}
-
-function createTalkLabel(track) {
-    const blockEl = document.createElement('div')
-    const textEl = document.createElement('p')
-
-    blockEl.classList.add('label')
-
-    textEl.textContent = track.name.toUpperCase()
-    textEl.style.color = track.color
-
-    blockEl.append(textEl)
-
-    return blockEl
-}
-
-function createTalkBody(talk, showMore) {
-    const blockEl = document.createElement('div')
-
-    blockEl.classList.add('talk-body')
-    blockEl.style.backgroundColor = talk.track.color
-
-    const elements = [
-        createTitle('h3', 'topic', talk.title),
-        createTalkSpeaker(talk.speaker)
-    ]
-
-    if (showMore) {
-        elements.push(createTalkDetailsWrap(talk));
+        this.element = this.render();
     }
 
-    blockEl.append(...elements)
+    actions(dom) {
+        dom.toggleButton.addEventListener('click', () => {
+            this.toggleDetails(dom)
+        })
+    }
 
-    return blockEl
-}
+    toggleDetails(dom) {
+        const isOpened = dom.wrapper.classList.toggle('isActive')
 
-function createTalkSpeaker(speaker) {
-    const blockEl = document.createElement('div')
+        dom.toggleButton.classList.toggle('isActive', isOpened)
 
-    blockEl.classList.add('speaker')
+        dom.toggleButton.textContent = isOpened
+            ? 'Hide details'
+            : 'Show details'
+    }
 
-    blockEl.append(
-        createSpeakerName(speaker.name),
-        createSpeakerCompany(speaker.company)
-    )
+    label() {
+        const blockEl = document.createElement('div')
+        const textEl = document.createElement('p')
 
-    return blockEl
-}
+        blockEl.classList.add('label')
+        textEl.textContent = this.talk.track.name.toUpperCase()
+        textEl.style.color = this.talk.track.color
 
-function createSpeakerName(name) {
-    const spanEl = document.createElement('span')
+        blockEl.append(textEl)
 
-    spanEl.textContent = `${name} // `
+        return blockEl
+    }
 
-    return spanEl
-}
+    body() {
+        const blockEl = document.createElement('div')
 
-function createSpeakerCompany(company) {
-    const spanEl = document.createElement('span')
+        blockEl.classList.add('talk-body')
+        blockEl.style.backgroundColor = this.talk.track.color
 
-    spanEl.textContent = company
+        const elements = this.showMore
+            ? [
+                createTitle('h3', 'topic', this.talk.title),
+                this.speaker(),
+                this.details()
+            ]
+            : [
+                createTitle('h3', 'topic', this.talk.title),
+                this.speaker()
+            ]
 
-    return spanEl
-}
+        blockEl.append(...elements)
 
-function createTalkDetailsWrap(talk) {
-    const blockEl = document.createElement('div')
+        return blockEl
+    }
 
-    blockEl.classList.add('wrap-details')
+    speaker() {
+        const dom = {
+            block: document.createElement('div'),
+            name: document.createElement('span'),
+            company: document.createElement('span')
+        }
 
-    const toggleBtn = createButton('Show details', 'show-details')
+        const { name: speakerName, company: speakerCompany } = this.talk.speaker
 
-    toggleBtn.addEventListener('click', () => {
-        const isOpened = blockEl.classList.toggle('isActive')
+        dom.block.classList.add('speaker')
+        dom.name.textContent = `${speakerName} // `
+        dom.company.textContent = speakerCompany
 
-        toggleBtn.classList.toggle('isActive', isOpened)
+        dom.block.append(
+            dom.name,
+            dom.company
+        )
 
-        toggleBtn.textContent = isOpened ? 'Hide details' : 'Show details'
-    })
+        return dom.block
+    }
 
-    blockEl.append(
-        createTalkDetails(talk),
-        toggleBtn
-    )
+    details() {
+        const dom = {
+            wrapper: document.createElement('div'),
+            block: document.createElement('div'),
+            inner: document.createElement('div'),
+            toggleButton: createButton('Show details', 'show-details'),
+            description: document.createElement('p'),
+            location: document.createElement('p'),
+        };
 
-    return blockEl
-}
+        dom.wrapper.classList.add('wrap-details')
+        dom.block.classList.add('talk-details')
+        dom.inner.classList.add('details-inner')
 
+        dom.description.textContent = this.talk.description
+        dom.location.textContent = `Location: ${this.talk.location}`
 
+        this.actions(dom)
 
+        dom.inner.append(
+            dom.description,
+            dom.location
+        )
 
-function createTalkDetails(talk) {
-    const blockEl = document.createElement('div')
+        dom.block.append(dom.inner)
+        dom.wrapper.append(
+            dom.block,
+            dom.toggleButton
+        )
 
-    blockEl.classList.add('talk-details')
+        return dom.wrapper
+    }
 
-    const innerBlockEl = document.createElement('div')
+    time() {
+        const blockEl = document.createElement('div')
 
-    innerBlockEl.classList.add('details-inner')
+        blockEl.classList.add('talk-time')
+        blockEl.style.backgroundColor = this.talk.track.color
 
-    innerBlockEl.append(
-        createTalkDescription(talk.description),
-        createTalkLocation(talk.location)
-    )
+        const favoriteOrDay = this.favorite
+            ? this.favoriteButton
+            : this.day()
 
-    blockEl.append(
-        innerBlockEl
-    )
+        blockEl.append(
+            this.startToEndTime(
+                this.talk.startTime,
+                this.talk.endTime
+            ),
+            this.barcode(),
+            favoriteOrDay
+        )
 
-    return blockEl
-}
+        return blockEl
+    }
 
-function createTalkDescription(text) {
-    const textEl = document.createElement('p')
+    startToEndTime(...times) {
+        const blockEl = document.createElement('div')
 
-    textEl.textContent = text
+        blockEl.classList.add('start-end')
 
-    return textEl
-}
+        times.forEach(time => {
+            const spanEl = document.createElement('span')
+            spanEl.textContent = time
+            blockEl.append(spanEl)
+        })
 
-function createTalkLocation(text) {
-    const textEl = document.createElement('p')
+        return blockEl
+    }
 
-    textEl.textContent = `Location: ${text}`
+    barcode() {
+        const imgEl = document.createElement('img')
 
-    return textEl
-}
+        imgEl.classList.add('barcode')
+        imgEl.src = `${this.importPath}${this.imgUrl}`
+        imgEl.alt = 'Barcode'
 
-function createTalkTime(talk, favorite) {
-    const blockEl = document.createElement('div')
+        return imgEl
+    }
 
-    blockEl.classList.add('talk-time')
-    blockEl.style.backgroundColor = talk.track.color
+    day() {
+        const textEl = document.createElement('p')
 
-    blockEl.append(
-        createTalkStartToEndTime(talk.startTime, talk.endTime),
-        createTalkBarcode('/images/pattern-barcode.svg'),
-        favorite
-            ? createFavoriteButton(talk.id)
-            : createTalkDay(talk.day)
-    )
+        textEl.classList.add('day')
+        textEl.textContent = `Day ${this.talk.day}`
 
-    return blockEl
-}
+        return textEl
+    }
 
-function createTalkStartToEndTime(...times) {
-    const blockEl = document.createElement('div')
+    render() {
+        const blockEl = document.createElement('article')
 
-    blockEl.classList.add('start-end')
+        blockEl.classList.add('talk')
+        blockEl.style.border = `1px solid ${this.talk.track.color}`
 
-    times.forEach(time => {
-        const spanEl = document.createElement('span')
-        spanEl.textContent = time
-        blockEl.append(spanEl)
-    })
+        blockEl.append(
+            this.label(),
+            this.body(),
+            this.time()
+        )
 
-    return blockEl
-}
-
-function createTalkBarcode(url) {
-    const imgEl = document.createElement('img')
-
-    imgEl.classList.add('barcode')
-
-    const basePath = import.meta.env.BASE_URL
-
-    imgEl.src = `${basePath}${url}`
-    imgEl.alt = 'Barcode'
-
-    return imgEl
-}
-
-function createTalkDay(text) {
-    const textEl = document.createElement('p')
-
-    textEl.classList.add('day')
-
-    textEl.textContent = `Day ${text}`
-
-    return textEl
+        return blockEl
+    }
 }

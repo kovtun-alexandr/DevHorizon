@@ -1,5 +1,5 @@
 import { getFullTalkDetails } from "../../services/dataService.js";
-import createTalkCard from "./TalkCard.js";
+import TalkCard from "./TalkCard.js";
 
 export default function createTalkList(
     talks,
@@ -12,9 +12,9 @@ export default function createTalkList(
     blockEl.classList.add('talk-list')
 
     talks.forEach(talk => {
-        const fullTalk = getFullTalkDetails(talk.id, data);
+        const fullTalk = getFullTalkDetails(talk.id, data)
         blockEl.append(
-            createTalkCard(fullTalk, showMore, favorite)
+            new TalkCard(fullTalk, showMore, favorite).element
         )
     });
 

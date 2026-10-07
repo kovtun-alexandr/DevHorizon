@@ -87,7 +87,6 @@
         }
     }
 
-
     .body-wrap {
         padding: 1rem;
         padding-block-end: .75rem;
@@ -173,7 +172,6 @@ body.modal-open {
 
     .popup-close {
         position: absolute;
-        /* position: relative; */
         width: 2.5rem;
         height: 2.5rem;
         top: 1.25rem;
