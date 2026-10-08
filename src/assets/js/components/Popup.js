@@ -1,5 +1,5 @@
 import createCloseButton from "./buttons/CloseButton.js"
-import createSpeakerInfo from "./speaker/SpeakerInfo.js"
+import SpeakerInfo from "./speaker/SpeakerInfo.js"
 import createTalkList from "./talk/TalkList.js"
 import createTitle from "./Title.js"
 
@@ -9,7 +9,7 @@ export default function createPopup(speaker, data) {
     dialogEl.classList.add('popup-modal')
 
     const closeBtn = createCloseButton(() => dialogEl.close())
-    const speakerEl = createSpeakerInfo(speaker, true, speaker.talks[0].track.color)
+    const speakerEl = new SpeakerInfo(speaker, true, speaker.talks[0].track.color).element
     const titleEl = createTitle('h3', 'modal-title', 'Talk')
     const talkEl = createTalkList(speaker.talks, data, false, true)
 

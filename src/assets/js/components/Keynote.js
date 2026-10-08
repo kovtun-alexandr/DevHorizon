@@ -2,7 +2,7 @@ import { getFullSpeakerDetails, getFullTalkDetails } from "../services/dataServi
 import { formatDate } from "../utils/date.js"
 import createButton from "./buttons/Button.js"
 import createPopup from "./Popup.js"
-import createSpeakerInfo from "./speaker/SpeakerInfo.js"
+import SpeakerInfo from "./speaker/SpeakerInfo.js"
 import createTitle from "./Title"
 
 export default function createKeynote(data) {
@@ -18,7 +18,7 @@ export default function createKeynote(data) {
 
         blockEl.append(
             createTitle('h2', 'keynote-title', `Featured ${fullTalk.track.name}`),
-            createSpeakerInfo(fullTalk.speaker),
+            new SpeakerInfo(fullTalk.speaker).element,
             createKeynoteTalkInfo(fullTalk, startTalkDate, data)
         )
     })

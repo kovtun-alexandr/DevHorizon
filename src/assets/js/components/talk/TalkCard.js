@@ -56,16 +56,14 @@ export default class TalkCard {
         blockEl.classList.add('talk-body')
         blockEl.style.backgroundColor = this.talk.track.color
 
-        const elements = this.showMore
-            ? [
-                createTitle('h3', 'topic', this.talk.title),
-                this.speaker(),
-                this.details()
-            ]
-            : [
-                createTitle('h3', 'topic', this.talk.title),
-                this.speaker()
-            ]
+        const elements = [
+            createTitle('h3', 'topic', this.talk.title),
+            this.speaker()
+        ]
+
+        if (this.showMore) {
+            elements.push(this.details())
+        }
 
         blockEl.append(...elements)
 

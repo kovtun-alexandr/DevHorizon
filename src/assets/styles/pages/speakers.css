@@ -210,9 +210,30 @@ body.modal-open {
         }
     }
 
+    .speaker-info {
+        display: grid;
+        grid-auto-columns: auto 1fr;
+        grid-column: span 2;
+        gap: 1.5rem 1rem;
+
+        @media (max-width: 35em) {
+            grid-template-columns: 1fr;
+            grid-column: auto;
+            gap: 1rem;
+        }
+    }
+
     .avatar {
         max-width: 9.5rem;
         width: 100%;
+
+        img {
+            display: block;
+            background-image: url(/images/pattern-avatar-bg.svg);
+            background-size: 10rem 10rem;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .body-wrap {
@@ -240,6 +261,10 @@ body.modal-open {
         position: relative;
         grid-column: span 2;
         padding-block: 1rem;
+
+        @media (max-width: 35em) {
+            grid-column: auto;
+        }
 
         &::before,
         &::after {

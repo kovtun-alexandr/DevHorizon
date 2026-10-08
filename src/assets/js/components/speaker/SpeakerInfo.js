@@ -1,75 +1,84 @@
 import createTitle from "../Title.js";
 
+export default class SpeakerInfo {
+    constructor(speaker, showBiography = null, bgColor = null) {
+        this.speaker = speaker;
+        this.showBiography = showBiography;
+        this.bgColor = bgColor;
 
-export default function createSpeakerInfo(
-    speaker,
-    biography = null,
-    bgColor = null
-) {
-    const fragmentEl = document.createDocumentFragment()
+        this.importPath = import.meta.env.BASE_URL;
+        this.cleanAvatarPath = this.speaker.avatar.replace(/^\//, '');
 
-    const elements = [
-        createSpeakerAvatar(speaker.avatar, speaker.name, bgColor),
-        createrSpicerBodyWrap(
-            createTitle('h3', 'name', speaker.name),
-            createSpeakerRoleAndCompany(speaker.role, speaker.company),
-        ),
-        biography ? createSpeakerBiography(speaker.bio) : null
-    ];
-
-    fragmentEl.append(...elements.filter(Boolean))
-
-    return fragmentEl
-}
-
-function createSpeakerAvatar(url, altText, bgColor) {
-    const blokEl = document.createElement('div')
-    const imgEl = document.createElement('img')
-
-    blokEl.classList.add('avatar')
-
-    const basePath = import.meta.env.BASE_URL
-
-    const cleanAvatarPath = url.replace(/^\//, '')
-
-    imgEl.src = `${basePath}${cleanAvatarPath}`;
-
-    // imgEl.src = url
-    imgEl.alt = altText
-
-    if (bgColor) {
-        blokEl.style.backgroundColor = bgColor
+        this.element = this.render();
     }
 
-    blokEl.append(imgEl)
+    avatar() {
+        const blockEl = document.createElement('div')
+        const imgEl = document.createElement('img')
 
-    return blokEl
-}
+        blockEl.classList.add('avatar')
 
-function createrSpicerBodyWrap(...elements) {
-    const blokEl = document.createElement('div')
+        imgEl.src = `${this.importPath}${this.cleanAvatarPath}`;
+        imgEl.alt = this.speaker.name
 
-    blokEl.classList.add('body-wrap')
+        if (this.bgColor) {
+            blockEl.style.backgroundColor = this.bgColor
+        }
 
-    blokEl.append(...elements)
+        blockEl.append(imgEl)
 
-    return blokEl
-}
+        return blockEl
+    }
 
-function createSpeakerRoleAndCompany(role, company) {
-    const textEl = document.createElement('p')
+    body() {
+        const blockEl = document.createElement('div')
 
-    textEl.classList.add('role')
-    textEl.textContent = `${role} @${company}`
+        blockEl.classList.add('body-wrap')
 
-    return textEl
-}
+        blockEl.append(
+            createTitle('h3', 'name', this.speaker.name),
+            this.roleAndCompany()
+        )
 
-function createSpeakerBiography(text) {
-    const textEl = document.createElement('p')
+        return blockEl
+    }
 
-    textEl.classList.add('biography')
-    textEl.textContent = text
+    roleAndCompany() {
+        const textEl = document.createElement('p')
 
-    return textEl
+        const { role, company } = this.speaker
+
+        textEl.classList.add('role')
+        textEl.textContent = `${role} @${company}`
+
+        return textEl
+    }
+
+    biography() {
+        const textEl = document.createElement('p')
+
+        textEl.classList.add('biography')
+        textEl.textContent = this.speaker.bio
+
+        return textEl
+    }
+
+    render() {
+        const blockEl = document.createElement('div')
+
+        blockEl.classList.add('speaker-info')
+
+        const elements = [
+            this.avatar(),
+            this.body()
+        ]
+
+        if (this.showBiography) {
+            elements.push(this.biography())
+        }
+
+        blockEl.append(...elements)
+
+        return blockEl
+    }
 }

@@ -1,6 +1,6 @@
 import createPopup from "../Popup.js"
 import createTitle from "../Title.js"
-import createSpeakerInfo from "./SpeakerInfo.js"
+import SpeakerInfo from "./SpeakerInfo.js"
 
 export default function createSpeakerCard(speaker, data, biography) {
     const blockEl = document.createElement('article')
@@ -13,15 +13,13 @@ export default function createSpeakerCard(speaker, data, biography) {
 
     const bgColor = speaker.talks[0].track.color
 
-    if (bgColor) {
-        blockEl.append(
-            createSpeakerInfo(speaker, biography, bgColor)
+    bgColor
+        ? blockEl.append(
+            new SpeakerInfo(speaker, biography, bgColor).element
         )
-    } else {
-        blockEl.append(
-            createSpeakerInfo(speaker, biography)
+        : blockEl.append(
+            new SpeakerInfo(speaker, biography).element
         )
-    }
 
     speaker.talks.forEach(talk => {
         blockEl.append(
