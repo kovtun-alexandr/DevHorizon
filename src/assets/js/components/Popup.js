@@ -9,22 +9,48 @@ export default function createPopup(speaker, data) {
     dialogEl.classList.add('popup-modal')
 
     const closeBtn = createCloseButton(() => dialogEl.close())
-    const speakerEl = new SpeakerInfo(speaker, true, speaker.talks[0].track.color).element
-    const titleEl = createTitle('h3', 'modal-title', 'Talk')
-    const talkEl = createTalkList(speaker.talks, data, false, true)
 
-    dialogEl.append(closeBtn, speakerEl, titleEl, talkEl)
+    const speakerEl = new SpeakerInfo(
+        speaker,
+        true,
+        speaker.talks[0].track.color
+    ).element
 
-    dialogEl.addEventListener('click', (e) => {
-        if (e.target === dialogEl) {
-            dialogEl.close();
+    const titleEl = createTitle(
+        'h3',
+        'modal-title',
+        'Talk'
+    )
+
+    const talkEl = createTalkList(
+        speaker.talks,
+        data,
+        false,
+        true
+    )
+
+    dialogEl.append(
+        closeBtn,
+        speakerEl,
+        titleEl,
+        talkEl
+    )
+
+    bindEvents(dialogEl)
+
+    document.body.append(dialogEl)
+
+    dialogEl.showModal()
+}
+
+function bindEvents(element) {
+    element.addEventListener('click', (e) => {
+        if (e.target === element) {
+            element.close();
         }
     });
 
-    dialogEl.addEventListener('close', () => {
-        dialogEl.remove();
+    element.addEventListener('close', () => {
+        element.remove();
     })
-
-    document.body.append(dialogEl)
-    dialogEl.showModal()
 }
