@@ -9,7 +9,16 @@ export default function createMenuButton() {
 
     const spanEl = document.createElement('span')
 
+    buttonEl.addEventListener('click', headerActions)
+
     buttonEl.append(spanEl)
 
     return buttonEl
+}
+
+function headerActions(e) {
+    const targetElement = e.target
+    if (targetElement.closest('.menu-button')) {
+        document.body.classList.toggle('menu-open')
+    }
 }

@@ -13,12 +13,3 @@ export function renderHeader(logo, navigation) {
 
     return header
 }
-
-document.addEventListener('click', headerActions)
-
-function headerActions(e) {
-    const targetElement = e.target
-    if (targetElement.closest('.menu-button')) {
-        document.body.classList.toggle('menu-open')
-    }
-}

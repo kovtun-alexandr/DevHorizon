@@ -80,6 +80,7 @@
     display: none;
     outline: none;
     transition: .2s;
+    pointer-events: none;
 
     @media (max-width: 45.5em) {
         position: relative;
@@ -87,6 +88,7 @@
         width: 2.5rem;
         height: 2.5rem;
         border: 1px solid var(--neutral-100);
+        pointer-events: auto;
 
         span,
         &::before,
