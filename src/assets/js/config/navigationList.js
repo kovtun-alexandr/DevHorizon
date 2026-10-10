@@ -1,4 +1,4 @@
-export const navigationsList = [
+export const NAVIGATION_LIST = Object.freeze([
     {
         title: 'Home',
         href: './',
@@ -14,4 +14,4 @@ export const navigationsList = [
         href: './speakers.html',
         page: 'speakers'
     },
-]
+])

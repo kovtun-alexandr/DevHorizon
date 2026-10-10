@@ -1,4 +1,4 @@
-import { navigationsList } from '../config/navigationsList.js';
+import { NAVIGATION_LIST } from '../config/navigationList.js';
 import createLink from './Link.js';
 
 export default function createNavigation(className, page) {
@@ -8,7 +8,7 @@ export default function createNavigation(className, page) {
 
     const currentPage = page
 
-    navigationsList.forEach((item) => {
+    NAVIGATION_LIST.forEach((item) => {
         const linkEl = createLink(
             item.title,
             false,
