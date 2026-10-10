@@ -9,50 +9,83 @@ export default function createFilter(data, onFilterChange, initialFilters) {
         createFilterButtonList(data)
     )
 
-    let currentFiltersState = initialFilters || { days: [], trackIds: [], mySchedule: null }
-
-    updateVisualButtonsState(blockEl, currentFiltersState);
-
-    blockEl.addEventListener('click', (e) => {
-        const button = e.target.closest('button')
-
-        if (!button) return
-
-        let action = {}
-
-        if (button.dataset.action === 'clear') {
-            action = { type: 'clear-all' }
-        } else if (button.dataset.action === 'schedule') {
-            const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
-            action = { type: 'my-schedule', value: favorites }
-        } else if (button.dataset.day) {
-            action = { type: 'day', value: Number(button.dataset.day) }
-        } else if (button.dataset.trackId) {
-            action = { type: 'track-id', value: button.dataset.trackId }
-        } else {
-            return
+    const filterContext = {
+        element: blockEl,
+        onFilterChange,
+        currentFiltersState: initialFilters || {
+            days: [],
+            trackIds: [],
+            mySchedule: null
         }
+    }
 
-        currentFiltersState = onFilterChange(action)
+    updateVisualButtonsState(
+        filterContext.element,
+        filterContext.currentFiltersState
+    );
 
-        updateVisualButtonsState(blockEl, currentFiltersState)
-    })
-
-    window.addEventListener('favoritesUpdated', () => {
-        const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
-
-        if (currentFiltersState.mySchedule !== null) {
-            if (favorites.length === 0) {
-                currentFiltersState = onFilterChange({ type: 'clear-all' })
-            } else {
-                currentFiltersState = onFilterChange({ type: 'update-favorites', value: favorites })
-            }
-        }
-
-        updateVisualButtonsState(blockEl, currentFiltersState)
-    })
+    bindEvents(filterContext)
 
     return blockEl
+}
+
+function bindEvents(context) {
+    const { element } = context
+
+    element.addEventListener('click', (e) => {
+        handleFilterChange(e, context)
+    })
+
+    element.addEventListener('favoritesUpdated', () => {
+        handleFavoritesUpdate(context)
+    })
+}
+
+function handleFilterChange(e, context) {
+    const { element, onFilterChange } = context
+    const button = e.target.closest('button')
+
+    if (!button) return
+
+    let action = {}
+
+    if (button.dataset.action === 'clear') {
+        action = { type: 'clear-all' }
+    } else if (button.dataset.action === 'schedule') {
+        const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+        action = { type: 'my-schedule', value: favorites }
+    } else if (button.dataset.day) {
+        action = { type: 'day', value: Number(button.dataset.day) }
+    } else if (button.dataset.trackId) {
+        action = { type: 'track-id', value: button.dataset.trackId }
+    } else {
+        return
+    }
+
+    context.currentFiltersState = onFilterChange(action)
+
+    updateVisualButtonsState(
+        element, 
+        context.currentFiltersState
+    )
+}
+
+function handleFavoritesUpdate(context) {
+    const { element, onFilterChange } = context
+    const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+
+    if (context.currentFiltersState.mySchedule !== null) {
+        if (favorites.length === 0) {
+            context.currentFiltersState = onFilterChange({ type: 'clear-all' })
+        } else {
+            context.currentFiltersState = onFilterChange({ type: 'update-favorites', value: favorites })
+        }
+    }
+
+    updateVisualButtonsState(
+        element, 
+        context.currentFiltersState
+    )
 }
 
 function updateVisualButtonsState(element, filters) {
