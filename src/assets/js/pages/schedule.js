@@ -13,7 +13,7 @@ export default function initSchedule(data) {
         createTitle('h2', 'schedule-title', 'Schedule'),
     )
 
-    const talks = data.talks.filter(talk => talk.id !== 'tk_0')
+    const talks = data.talks
 
     const urlParams = new URLSearchParams(window.location.search)
     const initialTrack = urlParams.get('track')
