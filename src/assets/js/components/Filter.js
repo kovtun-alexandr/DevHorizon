@@ -36,7 +36,7 @@ function bindEvents(context) {
         handleFilterChange(e, context)
     })
 
-    element.addEventListener('favoritesUpdated', () => {
+    window.addEventListener('favoritesUpdated', () => {
         handleFavoritesUpdate(context)
     })
 }
@@ -65,7 +65,7 @@ function handleFilterChange(e, context) {
     context.currentFiltersState = onFilterChange(action)
 
     updateVisualButtonsState(
-        element, 
+        element,
         context.currentFiltersState
     )
 }
@@ -83,7 +83,7 @@ function handleFavoritesUpdate(context) {
     }
 
     updateVisualButtonsState(
-        element, 
+        element,
         context.currentFiltersState
     )
 }
