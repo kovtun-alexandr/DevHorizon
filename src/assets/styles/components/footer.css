@@ -71,7 +71,6 @@
     font-size: var(--text-size-14);
     line-height: var(--line-height-140);
     font-weight: var(--font-medium);
-    text-transform: uppercase;
 }
 
 .footer-nav,
