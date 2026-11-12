@@ -46,9 +46,9 @@
         align-items: center;
         padding: .625rem 1.5rem;
         border: 1px solid var(--neutral-100);
-        font-weight: var(--text-preset-6-weight);
-        font-size: var(--text-preset-6-size);
-        line-height: var(--text-preset-6-line-height);
+        font-weight: var(--font-medium);
+        font-size: var(--text-size-14);
+        line-height: var(--line-height-140);
         outline: none;
         text-transform: uppercase;
         transition: .2s;

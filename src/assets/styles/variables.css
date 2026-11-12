@@ -51,15 +51,15 @@
 
     /* ==================== TEXT SIZE ==================== */
 
-    --text-size-80: 80px;
-    --text-size-38: 38px;
-    --text-size-32: 32px;
-    --text-size-28: 28px;
-    --text-size-24: 24px;
-    --text-size-20: 20px;
-    --text-size-16: 16px;
-    --text-size-14: 14px;
-    --text-size-12: 12px;
+    --text-size-80: 5rem;
+    --text-size-38: 2.375rem;
+    --text-size-32: 2rem;
+    --text-size-28: 1.75rem;
+    --text-size-24: 1.5rem;
+    --text-size-20: 1.25rem;
+    --text-size-16: 1rem;
+    --text-size-14: 0.875rem;
+    --text-size-12: 0.75rem;
 
     /* ==================== LETTER SPACING ==================== */
 

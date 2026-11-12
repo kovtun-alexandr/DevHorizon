@@ -68,10 +68,10 @@
 }
 
 .navigation-title {
-    font-size: var(--text-preset-6-medium-size);
-    line-height: var(--text-preset-6-medium-line-height);
-    letter-spacing: var(--text-preset-6-medium-letter-spacing);
-    font-weight: var(--text-preset-6-medium-weight);
+    font-size: var(--text-size-14);
+    line-height: var(--line-height-140);
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
 }
 
 .footer-nav,
