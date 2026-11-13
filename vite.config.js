@@ -9,9 +9,9 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 // Явно вказуємо всі вхідні HTML-файли вашого проєкту
-                main: resolve(__dirname, 'index.html'),
-                schedule: resolve(__dirname, 'schedule.html'),
-                speakers: resolve(__dirname, 'speakers.html'),
+                main: resolve(import.meta.dirname, 'index.html'),
+                schedule: resolve(import.meta.dirname, 'schedule.html'),
+                speakers: resolve(import.meta.dirname, 'speakers.html'),
             },
         },
     },

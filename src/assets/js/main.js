@@ -10,7 +10,7 @@ import initSpeakers from './pages/speakers.js';
 const body = document.querySelector('body')
 const page = body.dataset.page
 
-body.append(renderHeader(createLogo(), createNavigation('header-nav', page)))
+body.append(renderHeader(createLogo(), createNavigation('header-nav', page, 'main-navigation')))
 
 const pageContentContainer = document.createElement('div')
 
