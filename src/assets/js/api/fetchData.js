@@ -1,4 +1,6 @@
-export async function fetchData(url) {
+import resolveAsset from '../utils/assets.js';
+
+async function fetchData(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -10,4 +12,9 @@ export async function fetchData(url) {
         console.error('Error fetching data:', error);
         throw error;
     }
+}
+
+export async function getConferenceData() {
+    const url = resolveAsset('./data/data.json');
+    return await fetchData(url);
 }
