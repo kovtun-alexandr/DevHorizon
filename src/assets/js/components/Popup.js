@@ -39,7 +39,7 @@ export default function createPopup(speaker, data) {
     bindEvents(dialogEl)
 
     document.body.append(dialogEl)
-
+    document.body.classList.add('modal-open')
     dialogEl.showModal()
 }
 
@@ -51,6 +51,7 @@ function bindEvents(element) {
     });
 
     element.addEventListener('close', () => {
+        document.body.classList.remove('modal-open');
         element.remove();
     })
 }
