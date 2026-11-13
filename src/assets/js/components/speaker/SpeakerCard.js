@@ -29,7 +29,7 @@ function createTalks(talks) {
 
 function bindEvents(element, speaker, data) {
     element.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
             createPopup(speaker, data)
         }
