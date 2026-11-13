@@ -21,4 +21,7 @@ function headerActions(e) {
     if (targetElement.closest('.menu-button')) {
         document.body.classList.toggle('menu-open')
     }
+
+    const isOpened = targetElement.classList.toggle('is-open');
+    targetElement.setAttribute('aria-expanded', String(isOpened));
 }

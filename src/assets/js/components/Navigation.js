@@ -1,10 +1,14 @@
 import { NAVIGATION_LIST } from '../config/navigationList.js';
 import createLink from './Link.js';
 
-export default function createNavigation(className, page) {
+export default function createNavigation(className, page, attributeName = null) {
     const navEl = document.createElement('nav')
 
     navEl.classList.add(className)
+
+    if (attributeName) {
+        navEl.setAttribute('id', attributeName)
+    }
 
     const currentPage = page
 
