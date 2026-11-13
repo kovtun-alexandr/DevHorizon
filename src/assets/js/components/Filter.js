@@ -176,7 +176,7 @@ function createFilterButtonList(data) {
 
                 fragmentEl.append(buttonEl)
             } else {
-                const track = data.tracks.filter(track => track.id === element.trakId)
+                const track = data.tracks.filter(track => track.id === element.trackId)
                 const buttonEl = createButton(
                     track[0].name,
                     'track-btn',
@@ -198,16 +198,16 @@ function createFilterButtonList(data) {
 }
 
 function sortList(data) {
-    const unicateDays = new Set(data.talks.map(talk => talk.day))
+    const uniqateDays = new Set(data.talks.map(talk => talk.day))
 
-    const days = [...unicateDays].map(day => ({ day }))
+    const days = [...uniqateDays].map(day => ({ day }))
 
-    const traks = data.tracks
+    const tracks = data.tracks
         .filter(track => track.id !== 'tr_0')
-        .map(track => ({ trakId: track.id }))
+        .map(track => ({ trackId: track.id }))
 
     return {
         days,
-        traks
+        tracks
     }
 }

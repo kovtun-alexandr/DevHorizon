@@ -1,14 +1,14 @@
 import { getFullSpeakerDetails } from "../../services/dataService.js";
-import createSpeakerCard from "./SpeakerCard";
+import createSpeakerCard from "./SpeakerCard.js";
 
-export default function createSpeakerList(speackers, data, biography) {
+export default function createSpeakerList(speakers, data, biography) {
     const blockEl = document.createElement('div')
 
     blockEl.classList.add('speaker-list')
 
-    speackers.forEach(speacker => {
-        const fullSpeakerDatail = getFullSpeakerDetails(speacker.id, data)
-        blockEl.append(createSpeakerCard(fullSpeakerDatail, data, biography))
+    speakers.forEach(speaker => {
+        const fullSpeakerDetail = getFullSpeakerDetails(speaker.id, data)
+        blockEl.append(createSpeakerCard(fullSpeakerDetail, data, biography))
     });
 
     return blockEl

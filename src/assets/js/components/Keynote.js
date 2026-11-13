@@ -3,7 +3,7 @@ import { formatDate } from "../utils/date.js"
 import createButton from "./buttons/Button.js"
 import createPopup from "./Popup.js"
 import SpeakerInfo from "./speaker/SpeakerInfo.js"
-import createTitle from "./Title"
+import createTitle from "./Title.js"
 
 export default function createKeynote(data) {
     const blockEl = document.createElement('div')
