@@ -22,6 +22,10 @@ body {
     main {
         flex: 1;
     }
+
+    &:has(dialog[open]) {
+        overflow: hidden;
+    }
 }
 
 .container {
