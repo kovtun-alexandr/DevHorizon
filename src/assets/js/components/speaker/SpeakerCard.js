@@ -9,7 +9,7 @@ export default function createSpeakerCard(speaker, data, biography) {
     blockEl.tabIndex = 0
     blockEl.setAttribute('role', 'button')
 
-    const bgColor = speaker.talks[0].track.color
+    const bgColor = speaker.talks?.[0]?.track?.color || 'var(--cyan-100)'
 
     blockEl.append(
         new SpeakerInfo(speaker, biography, bgColor).element,

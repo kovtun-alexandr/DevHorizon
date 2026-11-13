@@ -13,7 +13,7 @@ export default function createTrackList(tracks) {
             'card-link',
             `./schedule.html?track=${track.id}`,
             track.description,
-            track.color
+            track?.color
         )
 
         blockEl.append(trackCard)

@@ -13,7 +13,7 @@ export default function createPopup(speaker, data) {
     const speakerEl = new SpeakerInfo(
         speaker,
         true,
-        speaker.talks[0].track.color
+        speaker.talks?.[0]?.track?.color || 'var(--cyan-100)'
     ).element
 
     const titleEl = createTitle(

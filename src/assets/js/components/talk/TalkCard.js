@@ -10,6 +10,7 @@ export default class TalkCard {
         favorite = null,
     ) {
         this.talk = talk;
+        this.talkColor = talk.track?.color || 'var(--cyan-100)';
         this.showMore = showMore;
         this.favorite = favorite;
 
@@ -43,7 +44,7 @@ export default class TalkCard {
 
         blockEl.classList.add('label')
         textEl.textContent = this.talk.track.name.toUpperCase()
-        textEl.style.color = this.talk.track.color
+        textEl.style.color = this.talkColor
 
         blockEl.append(textEl)
 
@@ -54,7 +55,7 @@ export default class TalkCard {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('talk-body')
-        blockEl.style.backgroundColor = this.talk.track.color
+        blockEl.style.backgroundColor = this.talkColor
 
         const elements = [
             createTitle('h3', 'topic', this.talk.title),
@@ -128,7 +129,7 @@ export default class TalkCard {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('talk-time')
-        blockEl.style.backgroundColor = this.talk.track.color
+        blockEl.style.backgroundColor = this.talkColor
 
         const favoriteOrDay = this.favorite
             ? this.favoriteButton
@@ -183,7 +184,7 @@ export default class TalkCard {
         const blockEl = document.createElement('article')
 
         blockEl.classList.add('talk')
-        blockEl.style.border = `1px solid ${this.talk.track.color}`
+        blockEl.style.border = `1px solid ${this.talkColor}`
 
         blockEl.append(
             this.label(),
