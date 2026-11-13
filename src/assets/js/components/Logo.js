@@ -1,3 +1,5 @@
+import resolveAsset from "../utils/assets.js";
+
 export default function createLogo() {
     const blockEl = document.createElement('div')
 
@@ -26,10 +28,7 @@ export default function createLogo() {
 
 function logoImage() {
     const imgEl = document.createElement('img')
-
-    const basePath = import.meta.env.BASE_URL
-
-    imgEl.src = `${basePath}images/logo.svg`
+    imgEl.src = resolveAsset(`images/logo.svg`)
     imgEl.alt = 'Logo'
 
     return imgEl

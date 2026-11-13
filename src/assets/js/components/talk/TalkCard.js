@@ -1,3 +1,4 @@
+import resolveAsset from "../../utils/assets.js";
 import createButton from "../buttons/Button.js"
 import createFavoriteButton from "../buttons/FavoriteButton.js"
 import createTitle from "../Title.js"
@@ -15,8 +16,7 @@ export default class TalkCard {
         this.favoriteButton = this.favorite
             ? createFavoriteButton(this.talk.id)
             : null;
-        this.importPath = import.meta.env.BASE_URL;
-        this.imgUrl = '/images/pattern-barcode.svg';
+        this.imgUrl = resolveAsset('/images/pattern-barcode.svg');
 
         this.element = this.render();
     }
@@ -164,7 +164,7 @@ export default class TalkCard {
         const imgEl = document.createElement('img')
 
         imgEl.classList.add('barcode')
-        imgEl.src = `${this.importPath}${this.imgUrl}`
+        imgEl.src = this.imgUrl
         imgEl.alt = 'Barcode'
 
         return imgEl

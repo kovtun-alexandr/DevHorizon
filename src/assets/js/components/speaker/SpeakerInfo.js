@@ -1,3 +1,4 @@
+import resolveAsset from "../../utils/assets.js";
 import createTitle from "../Title.js";
 
 export default class SpeakerInfo {
@@ -5,9 +6,7 @@ export default class SpeakerInfo {
         this.speaker = speaker;
         this.showBiography = showBiography;
         this.bgColor = bgColor;
-
-        this.importPath = import.meta.env.BASE_URL;
-        this.cleanAvatarPath = this.speaker.avatar.replace(/^\//, '');
+        this.avatarUrl = resolveAsset(this.speaker.avatar)
 
         this.element = this.render();
     }
@@ -18,7 +17,7 @@ export default class SpeakerInfo {
 
         blockEl.classList.add('avatar')
 
-        imgEl.src = `${this.importPath}${this.cleanAvatarPath}`;
+        imgEl.src = this.avatarUrl;
         imgEl.alt = this.speaker.name
 
         if (this.bgColor) {
