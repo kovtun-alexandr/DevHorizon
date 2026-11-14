@@ -32,6 +32,7 @@ export default class TalkCard {
         const isOpened = dom.wrapper.classList.toggle('isActive')
 
         dom.toggleButton.classList.toggle('isActive', isOpened)
+        dom.toggleButton.setAttribute('aria-expanded', isOpened ? 'true' : 'false');
 
         dom.toggleButton.textContent = isOpened
             ? 'Hide details'
