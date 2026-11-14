@@ -162,33 +162,16 @@ function createFilterButtonList(data) {
 
     clearBtn.disabled = true
 
-    for (const value of Object.values(filterData)) {
-        value.forEach((element => {
-            const key = Object.keys(element)[0]
-            const value = element[key]
+    filterData.days.forEach(({ day }) => {
+        fragmentEl.append(createButton(`day ${String(day).padStart(2, '0')}`, 'day-btn', 'data-day', day));
+    });
 
-            if (key === 'day') {
-                const buttonEl = createButton(
-                    `${key} ${String(value).padStart(2, '0')}`,
-                    `${key}-btn`,
-                    `data-${key}`,
-                    value
-                )
-
-                fragmentEl.append(buttonEl)
-            } else {
-                const track = data.tracks.filter(track => track.id === element.trackId)
-                const buttonEl = createButton(
-                    track[0].name,
-                    'track-btn',
-                    'data-track-id',
-                    track[0].id
-                )
-
-                fragmentEl.append(buttonEl)
-            }
-        }))
-    }
+    filterData.tracks.forEach(({ trackId }) => {
+        const track = data.tracks.find(t => t.id === trackId);
+        if (track) {
+            fragmentEl.append(createButton(track.name, 'track-btn', 'data-track-id', track.id));
+        }
+    });
 
     fragmentEl.append(
         myScheduleBtn,
