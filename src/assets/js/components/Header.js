@@ -7,8 +7,8 @@ export function renderHeader(logo, navigation) {
 
     header.append(
         logo,
-        navigation,
-        createMenuButton()
+        createMenuButton(),
+        navigation
     );
 
     return header
