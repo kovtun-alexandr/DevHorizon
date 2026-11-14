@@ -14,7 +14,11 @@ async function fetchData(url) {
     }
 }
 
+let cachedData = null;
+
 export async function getConferenceData() {
-    const url = resolveAsset('./data/data.json');
-    return await fetchData(url);
+    if (cachedData) return cachedData
+    const url = resolveAsset('./data/data.json')
+    cachedData = await fetchData(url)
+    return cachedData
 }
