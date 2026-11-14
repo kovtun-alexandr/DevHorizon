@@ -19,6 +19,8 @@ export default class SpeakerInfo {
 
         imgEl.src = this.avatarUrl;
         imgEl.alt = this.speaker.name
+        imgEl.loading = 'lazy';
+        imgEl.decoding = 'async';
 
         if (this.bgColor) {
             blockEl.style.backgroundColor = this.bgColor
