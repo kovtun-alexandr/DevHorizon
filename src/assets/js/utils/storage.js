@@ -6,7 +6,7 @@ const STORAGE_KEY = 'conference_favorites';
  */
 export function getFavorites() {
     try {
-        const storedData = localStoreage.getItem(STORAGE_KEY)
+        const storedData = localStorage.getItem(STORAGE_KEY)
         return storedData ? JSON.parse(storedData) : []
     } catch (error) {
         console.error('Помилка читання localStorage:', error);
