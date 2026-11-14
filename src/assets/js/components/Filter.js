@@ -1,3 +1,4 @@
+import { getFavorites } from "../utils/storage.js";
 import createButton from "./buttons/Button.js";
 
 export default function createFilter(data, onFilterChange, initialFilters) {
@@ -52,7 +53,7 @@ function handleFilterChange(e, context) {
     if (button.dataset.action === 'clear') {
         action = { type: 'clear-all' }
     } else if (button.dataset.action === 'schedule') {
-        const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+        const favorites = getFavorites()
         action = { type: 'my-schedule', value: favorites }
     } else if (button.dataset.day) {
         action = { type: 'day', value: Number(button.dataset.day) }
@@ -72,7 +73,7 @@ function handleFilterChange(e, context) {
 
 function handleFavoritesUpdate(context) {
     const { element, onFilterChange } = context
-    const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+    const favorites = getFavorites()
 
     if (context.currentFiltersState.mySchedule !== null) {
         if (favorites.length === 0) {
@@ -93,7 +94,7 @@ function updateVisualButtonsState(element, filters) {
 
     const buttons = element.querySelectorAll('button')
 
-    const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+    const favorites = getFavorites()
     const isFavoritesEmpty = favorites.length === 0;
 
     const isAnyFilterActive =
@@ -140,7 +141,7 @@ function createFilterButtonList(data) {
     const fragmentEl = document.createDocumentFragment()
     const filterData = sortList(data)
 
-    const favorites = JSON.parse(localStorage.getItem('conference_favorites')) || []
+    const favorites = getFavorites()
     const isFavoritesEmpty = favorites.length === 0
 
     const myScheduleBtn = createButton(
