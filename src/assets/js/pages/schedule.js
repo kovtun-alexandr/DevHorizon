@@ -2,6 +2,7 @@ import createFilter from "../components/Filter.js"
 import createSection from "../components/Section.js"
 import createTalkList from "../components/talk/TalkList.js"
 import createTitle from "../components/Title.js"
+import { getFavorites } from "../utils/storage.js"
 
 export default function initSchedule(data) {
     const mainEl = document.createElement('main')
@@ -16,20 +17,49 @@ export default function initSchedule(data) {
     const talks = data.talks
 
     const urlParams = new URLSearchParams(window.location.search)
-    const initialTrack = urlParams.get('track')
 
-    if (initialTrack) {
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    const trackParam = urlParams.get('track')
+    const initialTracks = trackParam ? trackParam.split(',').filter(Boolean) : []
+
+    const dayParam = urlParams.get('day')
+    const initialDays = dayParam ? dayParam.split(',').map(Number).filter(Boolean) : []
+
+    const favoritesParam = urlParams.get('favorites')
+    const parsedFavorites = favoritesParam ? favoritesParam.split(',').filter(Boolean) : null
+    const initialFavorites = (parsedFavorites && parsedFavorites.length > 0) ? parsedFavorites : null
 
     const activeFilters = {
-        days: [],
-        trackIds: initialTrack ? [initialTrack] : [],
-        mySchedule: null
+        days: initialDays,
+        trackIds: initialTracks,
+        mySchedule: initialFavorites
+    }
+
+    function syncFiltersToURL(filters) {
+        const params = new URLSearchParams()
+
+        if (filters.mySchedule !== null && filters.mySchedule.length > 0) {
+            params.set('favorites', [...filters.mySchedule].sort().join(','))
+        } else {
+            if (filters.days.length > 0) {
+                params.set('day', [...filters.days].sort((a, b) => a - b).join(','))
+            }
+            if (filters.trackIds.length > 0) {
+                params.set('track', [...filters.trackIds].sort().join(','))
+            }
+        }
+
+        const queryString = params.toString()
+        const newUrl = queryString
+            ? `${window.location.pathname}?${queryString}`
+            : window.location.pathname
+
+        window.history.replaceState({}, document.title, newUrl)
     }
 
     const handleFilterChange = (filterActions) => {
         updateFiltersState(activeFilters, filterActions)
+
+        syncFiltersToURL(activeFilters)
 
         const updatedTalks = getFilteredTalksArray(talks, activeFilters)
 
