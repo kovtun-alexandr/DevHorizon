@@ -22,7 +22,7 @@
 
         &:last-child {
             padding-block: 1.5rem;
-            font-size: var(--font-size-12);
+            font-size: var(--text-size-12);
             letter-spacing: var(--letter-spacing-05);
 
             @media (max-width: 35em) {
