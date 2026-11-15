@@ -104,7 +104,9 @@ function updateVisualButtonsState(element, filters) {
 
     buttons.forEach(button => {
         if (button.dataset.action === 'schedule') {
-            if (filters.mySchedule !== null) {
+            const isUserScheduleActive = !isFavoritesEmpty && filters.mySchedule !== null;
+
+            if (isUserScheduleActive) {
                 button.classList.add('is-active')
             } else {
                 button.classList.remove('is-active')
