@@ -1,7 +1,7 @@
 .footer {
     display: flex;
     flex-direction: column;
-    line-height: var(--text-preset-6-line-height);
+    line-height: var(--line-height-140);
 
     &>div {
         display: flex;
@@ -22,8 +22,8 @@
 
         &:last-child {
             padding-block: 1.5rem;
-            font-size: var(--text-preset-7-size);
-            letter-spacing: var(--text-preset-7-letter-spacing);
+            font-size: var(--font-size-12);
+            letter-spacing: var(--letter-spacing-05);
 
             @media (max-width: 35em) {
                 padding-block: 1.25rem;
