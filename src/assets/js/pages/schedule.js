@@ -2,7 +2,6 @@ import createFilter from "../components/Filter.js"
 import createSection from "../components/Section.js"
 import createTalkList from "../components/talk/TalkList.js"
 import createTitle from "../components/Title.js"
-import { getFavorites } from "../utils/storage.js"
 
 export default function initSchedule(data) {
     const mainEl = document.createElement('main')
