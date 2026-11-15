@@ -11,6 +11,14 @@ export default function createTalkList(
 
     blockEl.classList.add('talk-list')
 
+    if (!talks || talks.length === 0) {
+        const emptyEl = document.createElement('p')
+        emptyEl.classList.add('empty-message')
+        emptyEl.textContent = 'No talks found matching the selected filters.'
+        blockEl.append(emptyEl)
+        return blockEl
+    }
+
     talks.forEach(talk => {
         const fullTalk = getFullTalkDetails(talk.id, data)
         blockEl.append(
