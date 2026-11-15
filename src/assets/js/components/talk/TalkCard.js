@@ -106,7 +106,7 @@ export default class TalkCard {
         dom.wrapper.classList.add('wrap-details')
         dom.block.classList.add('talk-details')
         dom.inner.classList.add('details-inner')
-
+        dom.toggleButton.setAttribute('aria-expanded', 'false');
         dom.description.textContent = this.talk.description
         dom.location.textContent = `Location: ${this.talk.location}`
 
