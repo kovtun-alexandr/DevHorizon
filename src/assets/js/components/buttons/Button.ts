@@ -1,9 +1,9 @@
 export default function createButton(
-    text,
-    className,
-    attributeName = null,
-    attributeValue = null
-) {
+    text: string,
+    className: string,
+    attributeName?: string,
+    attributeValue?: string
+): HTMLButtonElement {
     const buttonEl = document.createElement('button')
 
     buttonEl.classList.add(className)
