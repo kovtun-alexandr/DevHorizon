@@ -1,6 +1,6 @@
 import resolveAsset from "../utils/assets.js";
 
-export default function createLogo() {
+export default function createLogo(): HTMLDivElement {
     const blockEl = document.createElement('div')
 
     blockEl.classList.add('logo')
@@ -26,15 +26,15 @@ export default function createLogo() {
     return blockEl
 }
 
-function logoImage() {
+function logoImage(): HTMLImageElement {
     const imgEl = document.createElement('img')
-    imgEl.src = resolveAsset(`images/logo.svg`)
+    imgEl.src = resolveAsset('images/logo.svg')
     imgEl.alt = 'Logo'
 
     return imgEl
 }
 
-function logoLink(link, imgEl) {
+function logoLink(link: string, imgEl: HTMLImageElement): HTMLAnchorElement {
     const linkEl = document.createElement('a')
 
     linkEl.href = link
