@@ -1,4 +1,4 @@
-import { footerNavigationTitles } from '../config/footerNavigationTitles.js';
+import { FOOTER_NAVIGATION_TITLES } from '../config/footerNavigationTitles.js';
 import { formatDate } from '../utils/date.js';
 import createButton from './buttons/Button.js';
 import createTitle from './Title.js';
@@ -56,15 +56,15 @@ function createFooterNavigation(navigation, tracks, data) {
 
     footerNavigation.append(
         createFooterNavigationColumn(
-            footerNavigationTitles.navigation,
+            FOOTER_NAVIGATION_TITLES.navigation,
             navigation
         ),
         createFooterNavigationColumn(
-            footerNavigationTitles.tracks,
+            FOOTER_NAVIGATION_TITLES.tracks,
             tracks
         ),
         createFooterNavigationColumn(
-            footerNavigationTitles.venue,
+            FOOTER_NAVIGATION_TITLES.venue,
             createFooterVenue(data)
         )
     )
