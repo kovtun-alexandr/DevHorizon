@@ -15,7 +15,6 @@ export default function createNavigation(className, page, attributeName = null) 
     NAVIGATION_LIST.forEach((item) => {
         const linkEl = createLink(
             item.title,
-            false,
             item.href
         )
 

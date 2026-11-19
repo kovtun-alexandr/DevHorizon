@@ -30,13 +30,13 @@ export default function initHome(data) {
             'speakers',
             createTitle('h2', 'speakers-title', 'Featured_speakers'),
             createSpeakerList(filteredSpeakers, data, false),
-            createLink('View all speakers', 'view-all-link', './speakers.html')
+            createLink('View all speakers', './speakers.html', 'view-all-link')
         ),
         createSection(
             'schedule',
             createTitle('h2', 'schedule-title', 'Schedule_highlights'),
             createTalkList(filteredTalks, data, true),
-            createLink('View full schedule', 'view-all-link', './schedule.html')
+            createLink('View full schedule', './schedule.html', 'view-all-link')
         )
     )
 

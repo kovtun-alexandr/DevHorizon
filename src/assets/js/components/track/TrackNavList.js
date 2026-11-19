@@ -10,7 +10,6 @@ export default function createTrackNavList(tracks) {
     visibleTracks.forEach(track => {
         const trackLink = createLink(
             track.name,
-            false,
             `./schedule.html?track=${track.id}`
         )
         blockEl.append(trackLink)
