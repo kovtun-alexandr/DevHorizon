@@ -1,4 +1,4 @@
-export default function createMenuButton() {
+export default function createMenuButton(): HTMLButtonElement {
     const buttonEl = document.createElement('button')
 
     buttonEl.classList.add('menu-button')
@@ -16,7 +16,7 @@ export default function createMenuButton() {
     return buttonEl
 }
 
-function bindEvents(button) {
+function bindEvents(button: HTMLButtonElement) {
     button.addEventListener('click', () => {
         const isOpen = button.classList.toggle('is-open')
         document.body.classList.toggle('menu-open', isOpen)
@@ -33,9 +33,13 @@ function bindEvents(button) {
     document.addEventListener('click', (e) => {
         if (!document.body.classList.contains('menu-open')) return
 
+        const target = e.target
+
+        if (!(target instanceof Node)) return
+
         const navEl = document.getElementById('main-navigation')
-        const clickedInsideNav = navEl && navEl.contains(e.target)
-        const clickedOnButton = button.contains(e.target)
+        const clickedInsideNav = navEl?.contains(target) ?? false
+        const clickedOnButton = button.contains(target)
 
         if (!clickedInsideNav && !clickedOnButton) {
             closeMenu(button)
@@ -43,7 +47,7 @@ function bindEvents(button) {
     })
 }
 
-function closeMenu(button) {
+function closeMenu(button: HTMLButtonElement) {
     document.body.classList.remove('menu-open')
     button.classList.remove('is-open')
     button.setAttribute('aria-expanded', 'false')
