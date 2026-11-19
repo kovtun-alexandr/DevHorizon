@@ -1,16 +1,16 @@
 export default function createLink(
-    text,
-    className = null,
-    link
-) {
+    text: string,
+    link: string,
+    className: string | null = null
+): HTMLAnchorElement {
     const linkEl = document.createElement('a')
+
+    linkEl.textContent = text
+    linkEl.href = link
 
     if (className) {
         linkEl.classList.add(className)
     }
-
-    linkEl.href = link
-    linkEl.textContent = text
 
     return linkEl
 }
