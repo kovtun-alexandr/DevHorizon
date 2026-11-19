@@ -1,4 +1,11 @@
-export function formatDate(dateString, locale = 'en-US') {
+export interface FormatedDate {
+    year: number;
+    month: string;
+    shortMonth: string;
+    day: number;
+}
+
+export function formatDate(dateString: string, locale = 'en-US'): FormatedDate {
     const date = new Date(`${dateString}T00:00:00`);
 
     return {
