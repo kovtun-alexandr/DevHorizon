@@ -1,5 +1,6 @@
 import { getFavorites } from "../utils/storage.js";
 import createButton from "./buttons/Button.js";
+import { GENERAL_TRACK_ID } from '../config/tracks.js';
 
 export default function createFilter(data, onFilterChange, initialFilters) {
     const blockEl = document.createElement('div')
@@ -189,7 +190,7 @@ function sortList(data) {
     const days = [...uniqateDays].map(day => ({ day }))
 
     const tracks = data.tracks
-        .filter(track => track.id !== 'tr_0')
+        .filter(track => track.id !== GENERAL_TRACK_ID)
         .map(track => ({ trackId: track.id }))
 
     return {
