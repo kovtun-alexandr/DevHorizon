@@ -1,7 +1,11 @@
 import { NAVIGATION_LIST } from '../config/navigationList.js';
 import createLink from './Link.js';
 
-export default function createNavigation(className, page, attributeName = null) {
+export default function createNavigation(
+    className: string,
+    page?: string,
+    attributeName: string | null = null
+): HTMLElement {
     const navEl = document.createElement('nav')
 
     navEl.classList.add(className)
@@ -9,8 +13,6 @@ export default function createNavigation(className, page, attributeName = null) 
     if (attributeName) {
         navEl.setAttribute('id', attributeName)
     }
-
-    const currentPage = page
 
     NAVIGATION_LIST.forEach((item) => {
         const linkEl = createLink(
@@ -20,7 +22,7 @@ export default function createNavigation(className, page, attributeName = null) 
 
         linkEl.dataset.page = item.page
 
-        if (item.page === currentPage) {
+        if (item.page === page) {
             linkEl.classList.add('isActive')
         }
 
