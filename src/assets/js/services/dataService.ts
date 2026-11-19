@@ -1,9 +1,27 @@
+import type { ConferenceData, Track, Speaker, Talk } from '../api/fetchData.js';
+
+export interface TalkWithDetails extends Talk {
+    speaker: Speaker | null;
+    track: Track | null;
+}
+
+export interface TalkWithTrack extends Talk {
+    track: Track | null;
+}
+
+export interface SpeakerWithTalks extends Speaker {
+    talks: TalkWithTrack[];
+}
+
 // Припускаємо, що дата виглядає як: const data = { conference, tracks, speakers, talks };
 
 /**
  * Знаходить доповідь за її ID та додає до неї повні об'єкти спікера та треку
  */
-export function getFullTalkDetails(talkId, data) {
+export function getFullTalkDetails(
+    talkId: string,
+    data: ConferenceData
+): TalkWithDetails | null {
     const talk = data.talks.find(t => t.id === talkId);
     if (!talk) return null;
 
@@ -17,15 +35,18 @@ export function getFullTalkDetails(talkId, data) {
     // Повертаємо новий «зшитий» об'єкт
     return {
         ...talk,
-        speaker: speaker || null,
-        track: track || null
+        speaker: speaker ?? null,
+        track: track ?? null
     };
 }
 
 /**
  * Знаходить спікера за ID та додає до нього всі його доповіді та їхні треки
  */
-export function getFullSpeakerDetails(speakerId, data) {
+export function getFullSpeakerDetails(
+    speakerId: string,
+    data: ConferenceData
+): SpeakerWithTalks | null {
     const speaker = data.speakers.find(s => s.id === speakerId);
     if (!speaker) return null;
 
