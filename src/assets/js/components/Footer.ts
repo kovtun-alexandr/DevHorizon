@@ -3,13 +3,20 @@ import { formatDate } from '../utils/date.js';
 import createButton from './buttons/Button.js';
 import createTitle from './Title.js';
 import createTrackNavList from './track/TrackNavList.js';
+import type { ConferenceData } from '../api/fetchData.js';
 
-export function renderFooter(logo, navigation, data) {
+export function renderFooter(
+    logo: HTMLElement,
+    navigation: HTMLElement,
+    data: ConferenceData
+): HTMLElement {
     const footer = document.createElement('footer');
 
     footer.classList.add('footer', 'container')
 
     const tracks = createTrackNavList(data.tracks)
+
+    console.log(data)
 
     footer.append(
         createFooterBody(logo, navigation, tracks, data),
@@ -18,9 +25,12 @@ export function renderFooter(logo, navigation, data) {
     return footer;
 }
 
-// === Footer Body ===
-
-function createFooterBody(logo, navigation, tracks, data) {
+function createFooterBody(
+    logo: HTMLElement,
+    navigation: HTMLElement,
+    tracks: HTMLElement,
+    data: ConferenceData
+): HTMLElement {
     const footerBody = document.createElement('div')
 
     footerBody.append(
@@ -31,7 +41,7 @@ function createFooterBody(logo, navigation, tracks, data) {
     return footerBody
 }
 
-function createFooterInfo(logo) {
+function createFooterInfo(logo: HTMLElement): HTMLElement {
     const footerInfo = document.createElement('div')
     footerInfo.classList.add('footer-info')
 
@@ -43,13 +53,19 @@ function createFooterInfo(logo) {
     return footerInfo
 }
 
-function createFooterInfoDescription(descriptionText) {
+function createFooterInfoDescription(
+    descriptionText: string
+): HTMLParagraphElement {
     const description = document.createElement('p')
     description.textContent = descriptionText
     return description
 }
 
-function createFooterNavigation(navigation, tracks, data) {
+function createFooterNavigation(
+    navigation: HTMLElement,
+    tracks: HTMLElement,
+    data: ConferenceData
+): HTMLElement {
     const footerNavigation = document.createElement('div')
 
     footerNavigation.classList.add('footer-navigation')
@@ -72,7 +88,9 @@ function createFooterNavigation(navigation, tracks, data) {
     return footerNavigation
 }
 
-function createFooterVenue(data) {
+function createFooterVenue(
+    data: ConferenceData
+): HTMLParagraphElement {
     const textEl = document.createElement('p')
     textEl.classList.add('venue')
 
@@ -87,7 +105,10 @@ function createFooterVenue(data) {
     return textEl
 }
 
-function createFooterNavigationColumn(title, blockEl) {
+function createFooterNavigationColumn(
+    title: string,
+    blockEl: HTMLElement
+): HTMLElement {
     const column = document.createElement('div')
     column.classList.add('navigation-column')
 
@@ -99,9 +120,7 @@ function createFooterNavigationColumn(title, blockEl) {
     return column
 }
 
-// === Footer Bottom ===
-
-function createFooterBottom() {
+function createFooterBottom(): HTMLElement {
     const footerBottom = document.createElement('div')
     const backToTop = createButton('Back to Top', 'back-to-top')
 
@@ -120,7 +139,9 @@ function createFooterBottom() {
     return footerBottom
 }
 
-function createCopyrightText(text) {
+function createCopyrightText(
+    text: string
+): HTMLParagraphElement {
     const copyright = document.createElement('p')
     copyright.textContent = text
     return copyright
