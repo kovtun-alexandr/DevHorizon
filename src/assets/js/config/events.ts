@@ -1,0 +1,1 @@
+export const FAVORITES_UPDATED_EVENT = 'favoritesUpdated';
