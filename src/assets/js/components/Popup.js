@@ -1,6 +1,6 @@
 import createCloseButton from "./buttons/CloseButton.js"
 import SpeakerInfo from "./speaker/SpeakerInfo.js"
-import createTalkList from "./talk/TalkList.js"
+import createTalkList from "./talk/TalkList.js/index.js"
 import createTitle from "./Title.js"
 
 export default function createPopup(speaker, data) {

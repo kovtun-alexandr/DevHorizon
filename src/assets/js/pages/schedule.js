@@ -1,6 +1,6 @@
 import createFilter from "../components/Filter.js"
 import createSection from "../components/Section.js"
-import createTalkList from "../components/talk/TalkList.js"
+import createTalkList from "../components/talk/TalkList.js/index.js"
 import createTitle from "../components/Title.js"
 
 export default function initSchedule(data) {
