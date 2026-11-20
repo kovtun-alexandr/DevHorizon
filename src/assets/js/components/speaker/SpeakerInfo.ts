@@ -1,8 +1,19 @@
+import type { Speaker } from "../../api/fetchData.js";
 import resolveAsset from "../../utils/assets.js";
 import createTitle from "../Title.js";
 
 export default class SpeakerInfo {
-    constructor(speaker, showBiography = null, bgColor = null) {
+    readonly speaker: Speaker;
+    readonly showBiography: boolean | null;
+    readonly bgColor: string | null;
+    readonly avatarUrl: string;
+    readonly element: HTMLElement;
+
+    constructor(
+        speaker: Speaker,
+        showBiography: boolean | null = null,
+        bgColor: string | null = null
+    ) {
         this.speaker = speaker;
         this.showBiography = showBiography;
         this.bgColor = bgColor;
@@ -11,7 +22,7 @@ export default class SpeakerInfo {
         this.element = this.render();
     }
 
-    avatar() {
+    private avatar(): HTMLDivElement {
         const blockEl = document.createElement('div')
         const imgEl = document.createElement('img')
 
@@ -31,7 +42,7 @@ export default class SpeakerInfo {
         return blockEl
     }
 
-    body() {
+    private body(): HTMLDivElement {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('body-wrap')
@@ -44,7 +55,7 @@ export default class SpeakerInfo {
         return blockEl
     }
 
-    roleAndCompany() {
+    private roleAndCompany(): HTMLParagraphElement {
         const textEl = document.createElement('p')
 
         const { role, company } = this.speaker
@@ -55,7 +66,7 @@ export default class SpeakerInfo {
         return textEl
     }
 
-    biography() {
+    private biography(): HTMLParagraphElement {
         const textEl = document.createElement('p')
 
         textEl.classList.add('biography')
@@ -64,12 +75,12 @@ export default class SpeakerInfo {
         return textEl
     }
 
-    render() {
+    render(): HTMLElement {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('speaker-info')
 
-        const elements = [
+        const elements: HTMLElement[] = [
             this.avatar(),
             this.body()
         ]
