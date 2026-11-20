@@ -16,8 +16,6 @@ export function renderFooter(
 
     const tracks = createTrackNavList(data.tracks)
 
-    console.log(data)
-
     footer.append(
         createFooterBody(logo, navigation, tracks, data),
         createFooterBottom()
