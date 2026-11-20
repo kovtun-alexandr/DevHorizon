@@ -5,7 +5,7 @@ import createKeynote from "../components/Keynote.js"
 import createLink from "../components/Link.js"
 import createTrackCardList from "../components/track/TrackList.js"
 import createSpeakerList from "../components/speaker/SpeakerList.js"
-import createTalkList from "../components/talk/TalkList.js/index.js"
+import createTalkList from "../components/talk/TalkList.js"
 
 export default function initHome(data) {
     const mainEl = document.createElement('main')
