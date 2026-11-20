@@ -1,4 +1,6 @@
-export default function createCloseButton(onClickAction) {
+export default function createCloseButton(
+    onClickAction: () => void
+): HTMLButtonElement {
     const buttonEl = document.createElement('button')
 
     buttonEl.classList.add('popup-close')
