@@ -1,34 +1,48 @@
+import type { TalkWithDetails } from "../../services/dataService.js";
 import resolveAsset from "../../utils/assets.js";
 import createButton from "../buttons/Button.js"
 import createFavoriteButton from "../buttons/FavoriteButton.js"
 import createTitle from "../Title.js"
 
+interface DetailsDom {
+    wrapper: HTMLDivElement;
+    toggleButton: HTMLButtonElement;
+}
+
 export default class TalkCard {
+    readonly talk: TalkWithDetails;
+    readonly talkColor: string;
+    readonly showMore: boolean | null;
+    readonly favorite: boolean | null;
+    readonly favoriteButton: HTMLButtonElement | null;
+    readonly imgUrl: string;
+    readonly element: HTMLElement;
+
     constructor(
-        talk,
-        showMore = null,
-        favorite = null,
+        talk: TalkWithDetails,
+        showMore: boolean | null = null,
+        favorite: boolean | null = null,
     ) {
         this.talk = talk;
-        this.talkColor = talk.track?.color || 'var(--cyan-100)';
+        this.talkColor = talk.track.color || 'var(--cyan-100)';
         this.showMore = showMore;
         this.favorite = favorite;
 
         this.favoriteButton = this.favorite
             ? createFavoriteButton(this.talk.id)
             : null;
-        this.imgUrl = resolveAsset('/images/pattern-barcode.svg');
+        this.imgUrl = resolveAsset('images/pattern-barcode.svg');
 
         this.element = this.render();
     }
 
-    actions(dom) {
+    private actions(dom: DetailsDom): void {
         dom.toggleButton.addEventListener('click', () => {
             this.toggleDetails(dom)
         })
     }
 
-    toggleDetails(dom) {
+    private toggleDetails(dom: DetailsDom): void {
         const isOpened = dom.wrapper.classList.toggle('isActive')
 
         dom.toggleButton.classList.toggle('isActive', isOpened)
@@ -39,7 +53,7 @@ export default class TalkCard {
             : 'Show details'
     }
 
-    label() {
+    private label(): HTMLDivElement {
         const blockEl = document.createElement('div')
         const textEl = document.createElement('p')
 
@@ -52,13 +66,13 @@ export default class TalkCard {
         return blockEl
     }
 
-    body() {
+    private body(): HTMLDivElement {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('talk-body')
         blockEl.style.backgroundColor = this.talkColor
 
-        const elements = [
+        const elements: HTMLElement[] = [
             createTitle('h3', 'topic', this.talk.title),
             this.speaker()
         ]
@@ -72,7 +86,7 @@ export default class TalkCard {
         return blockEl
     }
 
-    speaker() {
+    private speaker(): HTMLDivElement {
         const dom = {
             block: document.createElement('div'),
             name: document.createElement('span'),
@@ -93,7 +107,7 @@ export default class TalkCard {
         return dom.block
     }
 
-    details() {
+    private details(): HTMLDivElement {
         const dom = {
             wrapper: document.createElement('div'),
             block: document.createElement('div'),
@@ -126,15 +140,13 @@ export default class TalkCard {
         return dom.wrapper
     }
 
-    time() {
+    private time(): HTMLDivElement {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('talk-time')
         blockEl.style.backgroundColor = this.talkColor
 
-        const favoriteOrDay = this.favorite
-            ? this.favoriteButton
-            : this.day()
+        const favoriteOrDay = this.favoriteButton ?? this.day()
 
         blockEl.append(
             this.startToEndTime(
@@ -148,7 +160,7 @@ export default class TalkCard {
         return blockEl
     }
 
-    startToEndTime(...times) {
+    private startToEndTime(...times: string[]): HTMLDivElement {
         const blockEl = document.createElement('div')
 
         blockEl.classList.add('start-end')
@@ -162,7 +174,7 @@ export default class TalkCard {
         return blockEl
     }
 
-    barcode() {
+    private barcode(): HTMLImageElement {
         const imgEl = document.createElement('img')
 
         imgEl.classList.add('barcode')
@@ -172,7 +184,7 @@ export default class TalkCard {
         return imgEl
     }
 
-    day() {
+    private day(): HTMLParagraphElement {
         const textEl = document.createElement('p')
 
         textEl.classList.add('day')
@@ -181,7 +193,7 @@ export default class TalkCard {
         return textEl
     }
 
-    render() {
+    render(): HTMLElement {
         const blockEl = document.createElement('article')
 
         blockEl.classList.add('talk')
