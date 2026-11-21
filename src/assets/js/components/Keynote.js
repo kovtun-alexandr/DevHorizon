@@ -1,7 +1,7 @@
 import { getFullSpeakerDetails, getFullTalkDetails } from "../services/dataService.js"
 import { formatDate } from "../utils/date.js"
 import createButton from "./buttons/Button.js"
-import createPopup from "./Popup.js"
+import openPopup from "./Popup.js"
 import SpeakerInfo from "./speaker/SpeakerInfo.js"
 import createTitle from "./Title.js"
 
@@ -39,7 +39,7 @@ function createKeynoteTalkInfo(talk, date, data) {
     )
 
     buttonEl.addEventListener('click', () => {
-        createPopup(fullSpeakerDatail, data)
+        openPopup(fullSpeakerDatail, data)
     })
 
     return fragment

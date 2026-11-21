@@ -1,4 +1,4 @@
-import createPopup from "../Popup.js"
+import openPopup from "../Popup.js"
 import createTitle from "../Title.js"
 import SpeakerInfo from "./SpeakerInfo.js"
 
@@ -31,11 +31,11 @@ function bindEvents(element, speaker, data) {
     element.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
-            createPopup(speaker, data)
+            openPopup(speaker, data)
         }
     })
 
     element.addEventListener('click', () => {
-        createPopup(speaker, data)
+        openPopup(speaker, data)
     })
 }
