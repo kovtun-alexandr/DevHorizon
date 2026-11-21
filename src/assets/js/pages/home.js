@@ -3,7 +3,7 @@ import createTitle from "../components/Title.js"
 import createConference from "../components/Conference.js"
 import createKeynote from "../components/Keynote.js"
 import createLink from "../components/Link.js"
-import createTrackCardList from "../components/track/TrackList.js"
+import createTrackList from "../components/track/TrackList.js"
 import createSpeakerList from "../components/speaker/SpeakerList.js"
 import createTalkList from "../components/talk/TalkList.js"
 
@@ -24,7 +24,7 @@ export default function initHome(data) {
         createSection(
             'tracks',
             createTitle('h2', 'tracks-title', 'tracks'),
-            createTrackCardList(data.tracks)
+            createTrackList(data.tracks)
         ),
         createSection(
             'speakers',
