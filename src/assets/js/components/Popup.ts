@@ -1,9 +1,14 @@
+import type { ConferenceData } from "../api/fetchData.js"
+import type { SpeakerWithTalks } from "../services/dataService.js"
 import createCloseButton from "./buttons/CloseButton.js"
 import SpeakerInfo from "./speaker/SpeakerInfo.js"
 import createTalkList from "./talk/TalkList.js"
 import createTitle from "./Title.js"
 
-export default function createPopup(speaker, data) {
+export default function openPopup(
+    speaker: SpeakerWithTalks,
+    data: ConferenceData
+): void {
     const dialogEl = document.createElement('dialog')
 
     dialogEl.classList.add('popup-modal')
@@ -13,7 +18,7 @@ export default function createPopup(speaker, data) {
     const speakerEl = new SpeakerInfo(
         speaker,
         true,
-        speaker.talks?.[0]?.track?.color || 'var(--cyan-100)'
+        speaker.talks[0].track.color || 'var(--cyan-100)'
     ).element
 
     const titleEl = createTitle(
@@ -43,7 +48,7 @@ export default function createPopup(speaker, data) {
     dialogEl.showModal()
 }
 
-function bindEvents(element) {
+function bindEvents(element: HTMLDialogElement) {
     element.addEventListener('click', (e) => {
         if (e.target === element) {
             element.close();
