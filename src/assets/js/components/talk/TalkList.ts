@@ -1,17 +1,18 @@
+import type { Talk, ConferenceData } from "../../api/fetchData.js";
 import { getFullTalkDetails } from "../../services/dataService.js";
 import TalkCard from "./TalkCard.js";
 
 export default function createTalkList(
-    talks,
-    data,
-    showMore,
-    favorite
-) {
+    talks: Talk[],
+    data: ConferenceData,
+    showMore: boolean,
+    favorite: boolean
+): HTMLDivElement {
     const blockEl = document.createElement('div')
 
     blockEl.classList.add('talk-list')
 
-    if (!talks || talks.length === 0) {
+    if (talks.length === 0) {
         const emptyEl = document.createElement('p')
         emptyEl.classList.add('empty-message')
         emptyEl.textContent = 'No talks found matching the selected filters.'
