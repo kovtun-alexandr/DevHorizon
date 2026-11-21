@@ -9,6 +9,7 @@ export default function createTrackList(tracks) {
     const visibleTracks = tracks.filter(track => track.id !== GENERAL_TRACK_ID)
 
     visibleTracks.forEach(track => {
+        console.log(track)
         const trackCard = createTrackCard(
             track.name,
             'card-link',
