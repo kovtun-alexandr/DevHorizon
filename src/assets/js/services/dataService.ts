@@ -1,19 +1,17 @@
 import type { ConferenceData, Track, Speaker, Talk } from '../api/fetchData.js';
 
 export interface TalkWithDetails extends Talk {
-    speaker: Speaker | null;
-    track: Track | null;
+    speaker: Speaker;
+    track: Track;
 }
 
 export interface TalkWithTrack extends Talk {
-    track: Track | null;
+    track: Track;
 }
 
 export interface SpeakerWithTalks extends Speaker {
     talks: TalkWithTrack[];
 }
-
-// Припускаємо, що дата виглядає як: const data = { conference, tracks, speakers, talks };
 
 /**
  * Знаходить доповідь за її ID та додає до неї повні об'єкти спікера та треку
@@ -21,22 +19,22 @@ export interface SpeakerWithTalks extends Speaker {
 export function getFullTalkDetails(
     talkId: string,
     data: ConferenceData
-): TalkWithDetails | null {
+): TalkWithDetails {
     const talk = data.talks.find(t => t.id === talkId);
-    if (!talk) return null;
+
+    if (!talk) throw new Error(`Talk with ID ${talkId} not found`);
 
     // Знаходимо спікера, який прив'язаний до цієї доповіді
-    // (Або через talk.speakerId, або якщо їх кілька: data.speakers.filter(...))
-    const speaker = data.speakers.find(s => s.id === talk.speakerId);
+    const speaker = findSpeaker(talk.speakerId, data);
 
     // Знаходимо трек доповіді
-    const track = data.tracks.find(t => t.id === talk.trackId);
+    const track = findTrack(talk.trackId, data);
 
     // Повертаємо новий «зшитий» об'єкт
     return {
         ...talk,
-        speaker: speaker ?? null,
-        track: track ?? null
+        speaker,
+        track
     };
 }
 
@@ -46,20 +44,39 @@ export function getFullTalkDetails(
 export function getFullSpeakerDetails(
     speakerId: string,
     data: ConferenceData
-): SpeakerWithTalks | null {
-    const speaker = data.speakers.find(s => s.id === speakerId);
-    if (!speaker) return null;
+): SpeakerWithTalks {
+    const speaker = findSpeaker(speakerId, data);
 
     // Знаходимо всі доповіді цього спікера
     const speakerTalks = data.talks
         .filter(talk => talk.speakerId === speakerId)
         .map(talk => ({
             ...talk,
-            track: data.tracks.find(t => t.id === talk.trackId) || null
+            track: findTrack(talk.trackId, data)
         }));
 
     return {
         ...speaker,
         talks: speakerTalks
     };
+}
+
+function findSpeaker(speakerId: string, data: ConferenceData): Speaker {
+    const speaker = data.speakers.find(s => s.id === speakerId);
+
+    if (!speaker) {
+        throw new Error(`Speaker with ID ${speakerId} not found`)
+    }
+
+    return speaker;
+}
+
+function findTrack(trackId: string, data: ConferenceData): Track {
+    const track = data.tracks.find(t => t.id === trackId);
+
+    if (!track) {
+        throw new Error(`Track with ID ${trackId} not found`)
+    }
+
+    return track;
 }
