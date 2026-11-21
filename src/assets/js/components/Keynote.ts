@@ -1,3 +1,5 @@
+import type { ConferenceData, Talk } from "../api/fetchData.js"
+import type { TalkWithDetails } from "../services/dataService.js"
 import { getFullSpeakerDetails, getFullTalkDetails } from "../services/dataService.js"
 import { formatDate } from "../utils/date.js"
 import createButton from "./buttons/Button.js"
@@ -5,7 +7,7 @@ import openPopup from "./Popup.js"
 import SpeakerInfo from "./speaker/SpeakerInfo.js"
 import createTitle from "./Title.js"
 
-export default function createKeynote(data) {
+export default function createKeynote(data: ConferenceData): HTMLDivElement {
     const blockEl = document.createElement('div')
 
     blockEl.classList.add('keynote')
@@ -26,11 +28,15 @@ export default function createKeynote(data) {
     return blockEl
 }
 
-function createKeynoteTalkInfo(talk, date, data) {
+function createKeynoteTalkInfo(
+    talk: TalkWithDetails,
+    date: string,
+    data: ConferenceData
+): DocumentFragment {
     const fragment = document.createDocumentFragment()
     const buttonEl = createButton('View Talk', 'view-more', 'data-talkId', talk.id)
 
-    const fullSpeakerDatail = getFullSpeakerDetails(talk.speaker.id, data)
+    const fullSpeakerDetail = getFullSpeakerDetails(talk.speaker.id, data)
 
     fragment.append(
         createTitle('h4', 'topic', talk.title),
@@ -39,18 +45,21 @@ function createKeynoteTalkInfo(talk, date, data) {
     )
 
     buttonEl.addEventListener('click', () => {
-        openPopup(fullSpeakerDatail, data)
+        openPopup(fullSpeakerDetail, data)
     })
 
     return fragment
 }
 
-function createKeynoteTalkMeetingTime(talk, data) {
+function createKeynoteTalkMeetingTime(
+    talk: Talk,
+    date: string
+): HTMLParagraphElement {
     const textEl = document.createElement('p')
 
     textEl.classList.add('meeting')
 
-    const { shortMonth, day } = formatDate(data)
+    const { shortMonth, day } = formatDate(date)
 
     textEl.textContent = `${shortMonth} ${day} / ${talk.startTime} / ${talk.location}`
 
