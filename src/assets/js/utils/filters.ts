@@ -1,4 +1,7 @@
-export function syncFiltersToURL(filters) {
+import type { Talk } from "../api/fetchData"
+import type { ActiveFilters, FilterActions } from "../components/Filter"
+
+export function syncFiltersToURL(filters: ActiveFilters): void {
     const params = new URLSearchParams()
 
     if (filters.mySchedule !== null && filters.mySchedule.length > 0) {
@@ -20,7 +23,7 @@ export function syncFiltersToURL(filters) {
     window.history.replaceState({}, document.title, newUrl)
 }
 
-export function updateFiltersState(filters, action) {
+export function updateFiltersState(filters: ActiveFilters, action: FilterActions): void {
     if (action.type === 'clear-all') {
         filters.days = []
         filters.trackIds = []
@@ -63,9 +66,10 @@ export function updateFiltersState(filters, action) {
     }
 }
 
-export function getFilteredTalksArray(talks, filters) {
-    if (filters.mySchedule !== null) {
-        return talks.filter(talk => filters.mySchedule.includes(talk.id))
+export function getFilteredTalksArray(talks: Talk[], filters: ActiveFilters): Talk[] {
+    const favorites = filters.mySchedule
+    if (favorites !== null) {
+        return talks.filter(talk => favorites.includes(talk.id))
     }
 
     return talks.filter(talk => {
