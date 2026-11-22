@@ -1,6 +1,6 @@
 # DevHorizon 2026
 
-DevHorizon 2026 is a static conference website built with Vite, JavaScript, and CSS, without a frontend framework. It includes a home page, a schedule, and a speakers page, along with basic interactive features for filtering sessions and saving favorites.
+DevHorizon 2026 is a static conference website built with Vite, TypeScript, and CSS, without a frontend framework. It includes a home page, a schedule, and a speakers page, along with basic interactive features for filtering sessions and saving favorites.
 
 ## Project Pages
 
@@ -20,7 +20,7 @@ DevHorizon 2026 is a static conference website built with Vite, JavaScript, and 
 ## Technologies
 
 - Vite
-- JavaScript ES modules
+- TypeScript (strict mode)
 - CSS, including custom properties and modular stylesheets
 - JSON for conference data
 
@@ -37,6 +37,11 @@ DevHorizon 2026 is a static conference website built with Vite, JavaScript, and 
    ```bash
    npm run dev
    ```
+3. Check types (optional):
+
+   ```bash
+   npm run typecheck
+   ```
 
 ## Build
 
@@ -44,7 +49,7 @@ DevHorizon 2026 is a static conference website built with Vite, JavaScript, and 
 npm run build
 ```
 
-The production build is generated in the `dist` directory.
+The build runs the TypeScript type check first, then generates the production build in the `dist` directory.
 
 ## Project Structure
 
@@ -59,20 +64,21 @@ devhorizon/
 │   │   ├── fonts/
 │   │   ├── js/
 │   │   └── styles/
-│   └──
+│   └── vite-env.d.ts
 ├── index.html
 ├── schedule.html
 ├── speakers.html
 ├── package.json
+├── tsconfig.json
 ├── README.md
-├── .gitignore
-└── node_modules/
+└── .gitignore
 ```
 
 ## Available Scripts
 
 - `npm run dev` — start the local development server
-- `npm run build` — build the production version
+- `npm run typecheck` — run the TypeScript type check without emitting files
+- `npm run build` — type check and build the production version
 - `npm run preview` — preview the production build
 
 ## About
