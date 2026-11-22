@@ -1,9 +1,10 @@
 import { NAVIGATION_LIST } from '../config/navigationList.js';
+import type { PageName } from '../config/navigationList.js';
 import createLink from './Link.js';
 
 export default function createNavigation(
     className: string,
-    page?: string,
+    page: PageName,
     attributeName: string | null = null
 ): HTMLElement {
     const navEl = document.createElement('nav')
