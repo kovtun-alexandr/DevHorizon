@@ -1,17 +1,19 @@
+import type { ConferenceData } from "../api/fetchData.js"
+import type { ActiveFilters, FilterChangeHandler } from "../components/Filter.js"
 import createFilter from "../components/Filter.js"
 import createSection from "../components/Section.js"
 import createTalkList from "../components/talk/TalkList.js"
 import createTitle from "../components/Title.js"
 import { getFilteredTalksArray, syncFiltersToURL, updateFiltersState } from "../utils/filters.js"
 
-export default function initSchedule(data) {
+export default function initSchedule(data: ConferenceData): HTMLElement {
     const mainEl = document.createElement('main')
 
     mainEl.classList.add('main-schedule', 'container')
 
     const sectionEl = createSection(
         'schedule',
-        createTitle('h2', 'schedule-title', 'Schedule'),
+        createTitle('h2', 'schedule-title', 'Schedule')
     )
 
     const talks = data.talks
@@ -28,13 +30,13 @@ export default function initSchedule(data) {
     const parsedFavorites = favoritesParam ? favoritesParam.split(',').filter(Boolean) : null
     const initialFavorites = (parsedFavorites && parsedFavorites.length > 0) ? parsedFavorites : null
 
-    const activeFilters = {
+    const activeFilters: ActiveFilters = {
         days: initialDays,
         trackIds: initialTracks,
         mySchedule: initialFavorites
     }
 
-    const handleFilterChange = (filterActions) => {
+    const handleFilterChange: FilterChangeHandler = (filterActions) => {
         updateFiltersState(activeFilters, filterActions)
 
         syncFiltersToURL(activeFilters)
