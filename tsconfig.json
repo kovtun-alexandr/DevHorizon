@@ -8,8 +8,6 @@
             "DOM",
             "DOM.Iterable"
         ],
-        "allowJs": true,
-        "checkJs": false,
         "strict": true,
         "noEmit": true,
         "skipLibCheck": true,
